@@ -4,66 +4,115 @@
 <meta charset="UTF-8">
 <title>Para Mi Danny 🌻</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Playfair+Display&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 
+:root{
+  --gold:#ffd166;
+}
+
 body{
   margin:0;
-  background: linear-gradient(120deg,#fff6d6,#fff);
+  background:#0f0f14;
   overflow:hidden;
-  font-family:'Playfair Display', serif;
+  font-family:'Inter', sans-serif;
+  color:#fff;
 }
 
-/* 🌻 RAMO ELEGANTE */
-.ramo{
+/* 🎬 INTRO */
+#intro{
   position:fixed;
-  top:60px;
-  left:50%;
-  transform:translateX(-50%);
-  width:220px;
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#0f0f14;
+  z-index:999;
+}
+
+#intro h1{
+  font-weight:300;
+  letter-spacing:2px;
   opacity:0;
-  filter:blur(10px);
-  animation:aparecer 2.5s ease forwards;
+  animation:fadeIn 2s forwards;
 }
 
-@keyframes aparecer{
-  to{
-    opacity:1;
-    filter:blur(0);
-  }
-}
-
-/* ✨ LUZ AMBIENTE */
+/* 🌅 LUZ */
 .luz{
   position:fixed;
-  width:500px;
-  height:500px;
-  background:radial-gradient(circle, rgba(255,223,120,0.4), transparent);
-  top:-100px;
-  left:-100px;
-  animation:moverLuz 8s infinite alternate;
+  width:600px;
+  height:600px;
+  background:radial-gradient(circle, rgba(255,209,102,0.2), transparent);
+  top:-200px;
+  left:-200px;
+  animation:luzMove 10s infinite alternate;
 }
 
-@keyframes moverLuz{
-  to{
-    transform:translate(300px,200px);
-  }
+/* 🌻 RAMO */
+.ramo{
+  position:fixed;
+  top:80px;
+  left:50%;
+  transform:translateX(-50%) scale(0.8);
+  width:260px;
+  opacity:0;
+  filter:blur(20px);
+  animation:ramoIn 2s ease 2s forwards;
 }
 
-/* ✉️ CARTA */
+/* 💌 CARTA */
 .carta{
   position:relative;
   max-width:700px;
-  margin:180px auto;
-  background:rgba(255,255,255,0.85);
+  margin:200px auto;
   padding:40px;
-  border-radius:15px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.1);
-  backdrop-filter:blur(6px);
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(10px);
+  border-radius:20px;
+  box-shadow:0 10px 40px rgba(0,0,0,0.5);
   opacity:0;
-  transform:translateY(40px);
-  animation:entrada 2s ease 1s forwards;
+  transform:translateY(50px);
+  animation:entrada 2s ease 3s forwards;
+}
+
+/* TEXTO */
+h2{
+  font-family:'Dancing Script';
+  font-size:44px;
+  color:var(--gold);
+}
+
+p{
+  opacity:0;
+}
+
+/* 🌸 PETALOS */
+.petalo{
+  position:fixed;
+  top:-50px;
+  width:22px;
+  pointer-events:none;
+  animation:fall linear forwards;
+}
+
+/* ANIMACIONES */
+
+@keyframes fadeIn{
+  to{opacity:1;}
+}
+
+@keyframes luzMove{
+  to{transform:translate(300px,300px);}
+}
+
+@keyframes ramoIn{
+  to{
+    opacity:1;
+    filter:blur(0);
+    transform:translateX(-50%) scale(1);
+  }
 }
 
 @keyframes entrada{
@@ -73,37 +122,10 @@ body{
   }
 }
 
-/* TEXTO */
-h1{
-  font-family:'Dancing Script';
-  font-size:42px;
-}
-
-p{
-  line-height:1.8;
-}
-
-/* 🌸 PETALOS REALISTAS */
-.petalo{
-  position:fixed;
-  top:-50px;
-  width:25px;
-  pointer-events:none;
-  animation:caer linear forwards;
-}
-
-@keyframes caer{
-  0%{
-    transform:translate(0,-50px) rotate(0deg);
-    opacity:1;
-  }
-  50%{
-    transform:translate(50px,50vh) rotate(180deg);
-  }
-  100%{
-    transform:translate(-80px,110vh) rotate(360deg);
-    opacity:0;
-  }
+@keyframes fall{
+  0%{transform:translate(0,-50px) rotate(0);}
+  50%{transform:translate(80px,50vh) rotate(180deg);}
+  100%{transform:translate(-120px,110vh) rotate(360deg);}
 }
 
 </style>
@@ -111,41 +133,59 @@ p{
 
 <body>
 
+<div id="intro">
+  <h1>Hay cosas que nunca se olvidan…</h1>
+</div>
+
 <div class="luz"></div>
 
-<!-- 🌻 RAMO (AHORA SÍ BUENO) -->
-<img class="ramo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Sunflower_sky_backdrop.jpg/512px-Sunflower_sky_backdrop.jpg">
+<img class="ramo" src="https://pngimg.com/uploads/sunflower/sunflower_PNG13413.png">
 
 <div class="carta">
-<h1>Mi Danny</h1>
+  <h2>Mi Danny</h2>
 
-<p><strong>Amor de Mi Vida y para Mi Vida..</strong></p>
-<p>A veces me pongo a pensar… y no sé qué es más doloroso.</p>
-<p>Si haber vivido algo tan real contigo… y ahora extrañarlo.</p>
-<p>Pero si soy honesto, te volvería a elegir.</p>
-<p>Porque fuiste… la casualidad más linda de mi vida.</p>
-<p>No tengo corazón… porque te lo di.</p>
-<p>Te amo… de esa forma que no se va.</p>
-
+  <p>Amor de Mi Vida y para Mi Vida..</p>
+  <p>A veces me pongo a pensar…</p>
+  <p>y no sé qué es más difícil…</p>
+  <p>olvidarte… o aceptar que no quiero hacerlo.</p>
+  <p>Porque si volviera atrás…</p>
+  <p>te elegiría otra vez.</p>
+  <p>Sin dudarlo.</p>
 </div>
 
 <script>
 
-function crearPetalo(){
-  const p=document.createElement("img");
+/* 🎬 CONTROL INTRO */
+setTimeout(()=>{
+  document.getElementById("intro").style.display="none";
+  escribir();
+},2500);
+
+/* ✍️ TEXTO PROGRESIVO */
+function escribir(){
+  let p=document.querySelectorAll(".carta p");
+  p.forEach((el,i)=>{
+    setTimeout(()=>{
+      el.style.opacity=1;
+    },i*700);
+  });
+}
+
+/* 🌸 PETALOS PRO */
+function petalo(){
+  let p=document.createElement("img");
   p.src="https://pngimg.com/uploads/petal/petal_PNG17.png";
   p.classList.add("petalo");
 
   p.style.left=Math.random()*100+"vw";
   p.style.animationDuration=(6+Math.random()*4)+"s";
-  p.style.width=(15+Math.random()*15)+"px";
 
   document.body.appendChild(p);
 
   setTimeout(()=>p.remove(),9000);
 }
 
-setInterval(crearPetalo,250);
+setInterval(petalo,200);
 
 </script>
 
