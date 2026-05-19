@@ -8,81 +8,100 @@
 
 <style>
 
-body {
+body{
   margin:0;
+  background: linear-gradient(120deg,#fff6d6,#fff);
+  overflow:hidden;
   font-family:'Playfair Display', serif;
-  background: linear-gradient(#fdf6e3,#fff);
-  overflow-x:hidden;
 }
 
-/* 🌻 RAMO */
-.ramo {
-    position: fixed;
-    top: -200px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 200px;
-    height: 200px;
-    background: url('https://pngimg.com/uploads/sunflower/sunflower_PNG13413.png') no-repeat center/contain;
-    z-index: 10;
-    animation: caerRamo 2.5s ease-out forwards;
+/* 🌻 RAMO ELEGANTE */
+.ramo{
+  position:fixed;
+  top:60px;
+  left:50%;
+  transform:translateX(-50%);
+  width:220px;
+  opacity:0;
+  filter:blur(10px);
+  animation:aparecer 2.5s ease forwards;
 }
 
-@keyframes caerRamo {
-    0% {
-        top: -200px;
-        opacity: 0;
-        transform: translateX(-50%) scale(0.5);
-    }
-    60% {
-        top: 90px;
-        opacity: 1;
-        transform: translateX(-50%) scale(1.1);
-    }
-    100% {
-        top: 70px;
-        transform: translateX(-50%) scale(1);
-    }
+@keyframes aparecer{
+  to{
+    opacity:1;
+    filter:blur(0);
+  }
+}
+
+/* ✨ LUZ AMBIENTE */
+.luz{
+  position:fixed;
+  width:500px;
+  height:500px;
+  background:radial-gradient(circle, rgba(255,223,120,0.4), transparent);
+  top:-100px;
+  left:-100px;
+  animation:moverLuz 8s infinite alternate;
+}
+
+@keyframes moverLuz{
+  to{
+    transform:translate(300px,200px);
+  }
 }
 
 /* ✉️ CARTA */
-.carta {
+.carta{
+  position:relative;
   max-width:700px;
-  margin:160px auto;
+  margin:180px auto;
   background:rgba(255,255,255,0.85);
   padding:40px;
   border-radius:15px;
   box-shadow:0 10px 30px rgba(0,0,0,0.1);
-  backdrop-filter: blur(5px);
+  backdrop-filter:blur(6px);
+  opacity:0;
+  transform:translateY(40px);
+  animation:entrada 2s ease 1s forwards;
 }
 
-/* ✍️ TEXTO */
-h1 {
-  font-family:'Dancing Script', cursive;
+@keyframes entrada{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* TEXTO */
+h1{
+  font-family:'Dancing Script';
   font-size:42px;
 }
 
-p {
+p{
   line-height:1.8;
-  margin-bottom:15px;
 }
 
-/* 🌸 PETALOS */
-.petalo {
-  position: fixed;
-  top: -50px;
-  width: 25px;
+/* 🌸 PETALOS REALISTAS */
+.petalo{
+  position:fixed;
+  top:-50px;
+  width:25px;
   pointer-events:none;
-  animation: caer linear forwards;
+  animation:caer linear forwards;
 }
 
-@keyframes caer {
-  0% {
-    transform: translateY(-50px) rotate(0deg);
+@keyframes caer{
+  0%{
+    transform:translate(0,-50px) rotate(0deg);
     opacity:1;
   }
-  100% {
-    transform: translateY(110vh) rotate(360deg);
+  50%{
+    transform:translate(50px,50vh) rotate(180deg);
+  }
+  100%{
+    transform:translate(-80px,110vh) rotate(360deg);
     opacity:0;
   }
 }
@@ -92,52 +111,41 @@ p {
 
 <body>
 
-<!-- 🌻 RAMO -->
-<div class="ramo"></div>
+<div class="luz"></div>
 
-<!-- 💌 CARTA -->
+<!-- 🌻 RAMO (AHORA SÍ BUENO) -->
+<img class="ramo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Sunflower_sky_backdrop.jpg/512px-Sunflower_sky_backdrop.jpg">
+
 <div class="carta">
-
 <h1>Mi Danny</h1>
 
 <p><strong>Amor de Mi Vida y para Mi Vida..</strong></p>
-
 <p>A veces me pongo a pensar… y no sé qué es más doloroso.</p>
-
 <p>Si haber vivido algo tan real contigo… y ahora extrañarlo.</p>
-
-<p>Pero si soy honesto, te volvería a elegir incluso sabiendo cómo termina cada distancia.</p>
-
+<p>Pero si soy honesto, te volvería a elegir.</p>
 <p>Porque fuiste… la casualidad más linda de mi vida.</p>
-
 <p>No tengo corazón… porque te lo di.</p>
-
-<p>Y lo peor… es que ni siquiera quiero que me lo devuelvas.</p>
-
-<p>Te amo… de esa forma que no se va, que no se olvida.</p>
+<p>Te amo… de esa forma que no se va.</p>
 
 </div>
 
-<!-- 🌸 SCRIPT PETALOS -->
 <script>
 
 function crearPetalo(){
-  const petalo = document.createElement("img");
+  const p=document.createElement("img");
+  p.src="https://pngimg.com/uploads/petal/petal_PNG17.png";
+  p.classList.add("petalo");
 
-  petalo.src = "https://pngimg.com/uploads/petal/petal_PNG17.png";
+  p.style.left=Math.random()*100+"vw";
+  p.style.animationDuration=(6+Math.random()*4)+"s";
+  p.style.width=(15+Math.random()*15)+"px";
 
-  petalo.classList.add("petalo");
+  document.body.appendChild(p);
 
-  petalo.style.left = Math.random()*100 + "vw";
-  petalo.style.animationDuration = (5 + Math.random()*5) + "s";
-  petalo.style.width = (15 + Math.random()*20) + "px";
-
-  document.body.appendChild(petalo);
-
-  setTimeout(()=>petalo.remove(),8000);
+  setTimeout(()=>p.remove(),9000);
 }
 
-setInterval(crearPetalo,300);
+setInterval(crearPetalo,250);
 
 </script>
 
