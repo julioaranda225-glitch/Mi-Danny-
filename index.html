@@ -9,14 +9,17 @@
 
 <style>
 
+/* 🌌 FONDO PAPEL REAL */
 body {
     margin: 0;
     padding: 0;
-    background: linear-gradient(#fdf6e3, #fff);
+    background: url('https://i.imgur.com/8Km9tLL.jpg');
+    background-size: cover;
     font-family: 'Playfair Display', serif;
+    overflow-x: hidden;
 }
 
-/* 🌻 RAMO DE GIRASOLES */
+/* 🌻 RAMO */
 .ramo {
     text-align: center;
     margin-top: 30px;
@@ -27,68 +30,94 @@ body {
     margin: 0 5px;
     opacity: 0;
     transform: translateY(-30px);
-    animation: caer 1s ease forwards;
+    animation: caerRamo 1s ease forwards;
 }
 
-.ramo img:nth-child(2) { animation-delay: 0.3s; }
-.ramo img:nth-child(3) { animation-delay: 0.6s; }
-.ramo img:nth-child(4) { animation-delay: 0.9s; }
+.ramo img:nth-child(2){animation-delay:.3s;}
+.ramo img:nth-child(3){animation-delay:.6s;}
+.ramo img:nth-child(4){animation-delay:.9s;}
 
-@keyframes caer {
+@keyframes caerRamo {
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-/* 📜 Carta */
+/* 📜 CARTA */
 .carta {
     max-width: 800px;
     margin: 40px auto;
     padding: 50px;
-    background: #fffdf7;
+    background: rgba(255,253,247,0.95);
     border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    backdrop-filter: blur(2px);
     line-height: 1.8;
 }
 
-/* ✍️ Título */
+/* ✍️ TITULO */
 .titulo {
     font-family: 'Dancing Script', cursive;
     font-size: 42px;
     color: #d4a017;
 }
 
-/* ✨ Texto animado */
-.parrafo {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: aparecer 1s ease forwards;
+/* ⌨️ EFECTO ESCRITURA */
+.linea {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid rgba(0,0,0,0.4);
+    width: 0;
+    animation: escribir 4s steps(60,end) forwards, blink .7s infinite;
 }
 
-.parrafo:nth-child(1) { animation-delay: 1s; }
-.parrafo:nth-child(2) { animation-delay: 2s; }
-.parrafo:nth-child(3) { animation-delay: 3s; }
-.parrafo:nth-child(4) { animation-delay: 4s; }
-.parrafo:nth-child(5) { animation-delay: 5s; }
-.parrafo:nth-child(6) { animation-delay: 6s; }
-.parrafo:nth-child(7) { animation-delay: 7s; }
-.parrafo:nth-child(8) { animation-delay: 8s; }
-.parrafo:nth-child(9) { animation-delay: 9s; }
-
-@keyframes aparecer {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+@keyframes escribir {
+    to { width: 100%; }
 }
 
-/* 💛 Firma */
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+/* 💛 FIRMA */
 .firma {
     margin-top: 40px;
     font-family: 'Dancing Script', cursive;
     font-size: 28px;
     text-align: right;
+}
+
+/* 🌻 PÉTALOS */
+.petalo {
+    position: fixed;
+    top: -50px;
+    pointer-events: none;
+    animation: caer linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes caer {
+    0% {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* 🌙 MODO NOCHE */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #1a1a1a;
+    }
+    .carta {
+        background: rgba(40,40,40,0.9);
+        color: #f5f5f5;
+    }
 }
 
 </style>
@@ -104,8 +133,8 @@ body {
     <img src="https://i.imgur.com/4M7IWwP.png">
 </div>
 
-<!-- 🎵 Música -->
-<audio id="musica" autoplay loop>
+<!-- 🎵 MÚSICA -->
+<audio id="musica" loop>
   <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mpeg">
 </audio>
 
@@ -113,35 +142,52 @@ body {
 
 <div class="titulo">Mi Danny,</div>
 
-<p class="parrafo">Amor de mi vida y para mi vida…</p>
-
-<p class="parrafo">A veces me pongo a pensar y no sé qué es más doloroso: si haber vivido algo tan real contigo y ahora extrañarlo, o nunca haberlo vivido. Pero si soy honesto, te volvería a elegir incluso sabiendo cómo termina cada distancia, porque fuiste la casualidad más linda de mi vida.</p>
-
-<p class="parrafo">Me diste algo que nadie más ha podido darme. Incluso lograste regalarme el mejor cumpleaños en medio del caos, de las complicaciones y de todo lo que no estaba a nuestro favor. Y eso no se olvida.</p>
-
-<p class="parrafo">Cuando pensé que lo tendría todo, tú ya no estabas. Y en ese momento comprendí que tú eras todo.</p>
-
-<p class="parrafo">A veces creo que Dios, la vida o la energía sabía que la única forma de separarnos era poniendo un océano entre nosotros, porque de otra forma simplemente no habría sido posible.</p>
-
-<p class="parrafo">El hombre que hoy ves tiene tu nombre escondido en cada logro. Es gracias a ti. Todo ese crédito es tuyo.</p>
-
-<p class="parrafo">No tengo corazón, porque te lo di. Y si soy honesto, creo que te lo llevaste contigo. Y lo peor es que ni siquiera quiero que me lo devuelvas.</p>
-
-<p class="parrafo">Eres hermosa, encantadora… esa mezcla rara de paz, fuego, dulzura y locura que no se repite. Mi Danny…</p>
-
-<p class="parrafo">Te amo más que nunca. De esa forma que no se va, que no se olvida.</p>
-
-<p class="parrafo">Hoy estamos lejos, pero hay cosas que no saben de distancia… como ese “hoy y siempre”.</p>
-
-<p class="parrafo">Te amo… mujer mía, esposa mía, madre de mis hijos.</p>
-
-<p class="parrafo">Algún día… me vas a hacer papá.</p>
-
-<p class="parrafo">No fuiste algo bonito… fuiste algo que me cambió para siempre.</p>
+<p class="linea">Amor de mi vida y para mi vida…</p>
+<p class="linea">A veces me pongo a pensar y no sé qué es más doloroso…</p>
+<p class="linea">Pero si soy honesto, te volvería a elegir incluso sabiendo cómo termina todo…</p>
+<p class="linea">Porque fuiste la casualidad más linda de mi vida.</p>
+<p class="linea">Me diste algo que nadie más ha podido darme…</p>
+<p class="linea">Y entendí que tú… eras todo.</p>
+<p class="linea">El hombre que hoy ves tiene tu nombre en cada logro…</p>
+<p class="linea">No tengo corazón, porque te lo di.</p>
+<p class="linea">Eres esa mezcla perfecta que no se repite…</p>
+<p class="linea">Te amo más que nunca.</p>
+<p class="linea">Hoy estamos lejos… pero no en lo que importa.</p>
+<p class="linea">Hoy y siempre.</p>
+<p class="linea">Algún día… me vas a hacer papá.</p>
+<p class="linea">No fuiste algo bonito… fuiste algo eterno.</p>
 
 <div class="firma">De tu ingeniero 💛</div>
 
 </div>
+
+<script>
+
+/* 🎵 ACTIVAR MÚSICA SUAVE */
+document.body.addEventListener("click", () => {
+    const musica = document.getElementById("musica");
+    musica.volume = 0.2;
+    musica.play();
+});
+
+/* 🌻 PÉTALOS */
+function crearPetalo() {
+    const petalo = document.createElement("img");
+    petalo.src = "https://i.imgur.com/4M7IWwP.png";
+    petalo.classList.add("petalo");
+
+    petalo.style.left = Math.random() * 100 + "vw";
+    petalo.style.width = (20 + Math.random() * 30) + "px";
+    petalo.style.animationDuration = (6 + Math.random() * 6) + "s";
+
+    document.body.appendChild(petalo);
+
+    setTimeout(() => petalo.remove(), 12000);
+}
+
+setInterval(crearPetalo, 500);
+
+</script>
 
 </body>
 </html>
