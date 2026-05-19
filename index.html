@@ -2,107 +2,199 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Escena Romántica</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Mi Danny 🌻</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Playfair+Display&display=swap" rel="stylesheet">
 
 <style>
-    body {
-        margin: 0;
-        overflow: hidden;
-        background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
-        height: 100vh;
-        font-family: 'Georgia', serif;
-    }
 
-    /* Texto tipo carta */
-    .mensaje {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: white;
-        font-size: 28px;
-        text-align: center;
-        max-width: 600px;
-        line-height: 1.5;
-        text-shadow: 0 0 10px rgba(255,255,255,0.5);
-        z-index: 10;
-    }
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(#fdf6e3, #ffffff);
+    font-family: 'Playfair Display', serif;
+    overflow-x: hidden;
+}
 
-    /* Contenedor de pétalos */
-    .petalos {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        top: 0;
-        left: 0;
-    }
+/* 🌻 Ramo arriba */
+.ramo {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 5;
+    opacity: 0.95;
+}
 
-    .petalo {
-        position: absolute;
-        width: 40px;
-        height: 40px;
-        background-image: url('petalo.png');
-        background-size: contain;
-        background-repeat: no-repeat;
-        opacity: 0.8;
-        animation: caer linear infinite;
-    }
+.ramo img {
+    width: 220px;
+    margin-top: 10px;
+}
 
-    /* Animación */
-    @keyframes caer {
-        0% {
-            transform: translateY(-10vh) rotate(0deg);
-            opacity: 0;
-        }
-        10% {
-            opacity: 1;
-        }
-        100% {
-            transform: translateY(110vh) rotate(360deg);
-            opacity: 0;
-        }
+/* ✉️ Carta */
+.carta {
+    max-width: 700px;
+    margin: 140px auto 60px;
+    background: rgba(255,255,255,0.85);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 2s ease;
+}
+
+/* ✍️ Texto */
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 42px;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 18px;
+}
+
+/* 🌸 Pétalos */
+.petalo {
+    position: fixed;
+    top: -50px;
+    width: 25px;
+    pointer-events: none;
+    animation: caer linear forwards;
+}
+
+@keyframes caer {
+    0% {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 1;
     }
+    100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ✨ Animación entrada */
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(30px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="mensaje">
-    A veces me pongo a pensar…<br>
-    y no sé qué es más doloroso.<br><br>
-
-    Si haber vivido algo tan real contigo…<br>
-    y ahora extrañarlo,<br><br>
-
-    o nunca haberlo vivido.<br><br>
-
-    Pero si soy honesto,<br>
-    te volvería a elegir… siempre.
+<!-- 🌻 RAMO -->
+<div class="ramo">
+    <img src="https://i.imgur.com/8Km9tLL.png">
 </div>
 
-<div class="petalos" id="petalos"></div>
+<!-- 💌 CARTA -->
+<div class="carta">
 
+<h1>Mi Danny</h1>
+
+<p><strong>Amor de Mi Vida y para Mi Vida..</strong></p>
+
+<p>A veces me pongo a pensar… y no sé qué es más doloroso.</p>
+
+<p>Si haber vivido algo tan real contigo… y ahora extrañarlo, o nunca haberlo vivido.</p>
+
+<p>Pero si soy honesto, te volvería a elegir incluso sabiendo cómo termina cada distancia.</p>
+
+<p>Porque fuiste… la casualidad más linda de mi vida.</p>
+
+<p>Me diste algo que nadie más ha podido darme. Incluso lograste regalarme el mejor cumpleaños… en medio del caos, de las complicaciones… y de todo lo que no estaba a nuestro favor. Y eso… no se olvida.</p>
+
+<p>Y ahí entendí algo que no estaba listo para aceptar:</p>
+
+<p>Cuando pensé que lo tendría todo… tú ya no estabas.</p>
+
+<p>Y fue en ese momento donde entendí que tú… eras todo.</p>
+
+<p>A veces creo que Dios, o la vida, o la energía… sabía que la única forma de separarnos era poniendo un océano entre nosotros.</p>
+
+<p>Porque de otra forma… no habría sido posible.</p>
+
+<p>Y hay algo que quiero que sepas… de verdad.</p>
+
+<p>El hombre que hoy ves… el que la gente admira, respeta, reconoce… tiene tu nombre escondido en cada logro. Es gracias a ti.</p>
+
+<p>Todo ese crédito es tuyo.</p>
+
+<p>Porque fuiste una mujer increíble en todos los sentidos. Porque tú fuiste parte de eso. Porque tú me construiste en formas que nadie más va a entender.</p>
+
+<p>Y hay algo que quiero que tengas claro.</p>
+
+<p>No tengo corazón… porque te lo di.</p>
+
+<p>Y si soy honesto… creo que te lo llevaste contigo.</p>
+
+<p>Eres la dueña de él… y que yo sepa, aún no me lo has regresado.</p>
+
+<p>Y lo peor… es que ni siquiera quiero que me lo devuelvas.</p>
+
+<p>Eres… hermosa… encantadora… todo lo que podría describir como perfecto.</p>
+
+<p>Pero no solo eso…</p>
+
+<p>Eres esa mezcla rara de paz, fuego, dulzura y locura que simplemente… no se repite.</p>
+
+<p><strong>Mi Danny…</strong></p>
+
+<p>Y aunque no te lo diga todos los días… aunque a veces lo disimule… la verdad es que te amo más que nunca.</p>
+
+<p>De esa forma que no se va, que no se olvida.</p>
+
+<p>Te amo de esa forma incómoda… que se queda, que insiste, que no se reemplaza.</p>
+
+<p>Hoy estamos lejos… pero hay cosas que no saben de distancia.</p>
+
+<p>Como ese “hoy y siempre” que alguna vez dijimos… y que yo todavía cumplo en silencio.</p>
+
+<p>Te amo… mujer mía, esposa mía, madre de mis hijos.</p>
+
+<p>Y sí… recuerda la promesa.</p>
+
+<p>Algún día… me vas a hacer papá.</p>
+
+<p>No sé en qué momento leas esto… ni qué estés sintiendo ahora mismo.</p>
+
+<p>Pero si algo quiero que te quede claro es esto:</p>
+
+<p>No fuiste algo bonito que pasó en mi vida…</p>
+
+<p><strong>Fuiste… algo que me cambió para siempre.</strong></p>
+
+<p><em>De tu ingeniero… el que nunca deja de elegirte.</em></p>
+
+</div>
+
+<!-- 🌸 SCRIPT PÉTALOS -->
 <script>
-    const contenedor = document.getElementById("petalos");
 
-    function crearPetalo() {
-        const petalo = document.createElement("div");
-        petalo.classList.add("petalo");
+function crearPetalo() {
+    const petalo = document.createElement("img");
+    petalo.src = "petalo.png"; // TU IMAGEN
 
-        petalo.style.left = Math.random() * 100 + "vw";
-        petalo.style.animationDuration = (5 + Math.random() * 5) + "s";
-        petalo.style.width = (20 + Math.random() * 30) + "px";
-        petalo.style.height = petalo.style.width;
+    petalo.classList.add("petalo");
 
-        contenedor.appendChild(petalo);
+    petalo.style.left = Math.random() * 100 + "vw";
+    petalo.style.animationDuration = (5 + Math.random() * 5) + "s";
+    petalo.style.width = (15 + Math.random() * 20) + "px";
 
-        setTimeout(() => {
-            petalo.remove();
-        }, 10000);
-    }
+    document.body.appendChild(petalo);
 
-    setInterval(crearPetalo, 300);
+    setTimeout(() => {
+        petalo.remove();
+    }, 10000);
+}
+
+setInterval(crearPetalo, 300);
+
 </script>
 
 </body>
