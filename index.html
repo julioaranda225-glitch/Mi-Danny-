@@ -2,7 +2,6 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Para Mi Danny 🌻</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Playfair+Display&display=swap" rel="stylesheet">
@@ -10,76 +9,123 @@
 <style>
 
 body {
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(#fdf6e3, #ffffff);
-    font-family: 'Playfair Display', serif;
-    overflow-x: hidden;
+  margin:0;
+  font-family:'Playfair Display', serif;
+  background: linear-gradient(#fdf6e3,#fff);
+  overflow-x:hidden;
 }
 
-/* 🌻 Ramo arriba */
-.ramo {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    text-align: center;
-    z-index: 5;
-    opacity: 0.95;
+/* INTRO */
+#intro {
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:#111;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
 }
 
-.ramo img {
-    width: 220px;
-    margin-top: 10px;
+.box {
+  background:rgba(255,255,255,0.05);
+  padding:30px;
+  border-radius:15px;
+  text-align:center;
+  color:#fff;
 }
 
-/* ✉️ Carta */
+input {
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  margin-top:10px;
+  width:80%;
+}
+
+button {
+  margin-top:15px;
+  padding:10px 20px;
+  border:none;
+  border-radius:10px;
+  background:#ffd166;
+  cursor:pointer;
+}
+
+/* CARTA */
 .carta {
-    max-width: 700px;
-    margin: 140px auto 60px;
-    background: rgba(255,255,255,0.85);
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    backdrop-filter: blur(5px);
-    animation: fadeIn 2s ease;
+  max-width:700px;
+  margin:120px auto;
+  background:rgba(255,255,255,0.85);
+  padding:40px;
+  border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  display:none;
+  opacity:0;
+  transition:1s;
 }
 
-/* ✍️ Texto */
+/* TITULO */
 h1 {
-    font-family: 'Dancing Script', cursive;
-    font-size: 42px;
+  font-family:'Dancing Script', cursive;
+  font-size:42px;
 }
 
+/* TEXTO */
 p {
-    font-size: 18px;
-    line-height: 1.8;
-    margin-bottom: 18px;
+  line-height:1.8;
+  margin-bottom:15px;
+  opacity:0;
 }
 
-/* 🌸 Pétalos */
+/* PETALOS */
 .petalo {
-    position: fixed;
-    top: -50px;
-    width: 25px;
-    pointer-events: none;
-    animation: caer linear forwards;
+  position:fixed;
+  top:-50px;
+  width:25px;
+  animation:caer linear forwards;
 }
 
 @keyframes caer {
-    0% {
-        transform: translateY(-50px) rotate(0deg);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(110vh) rotate(360deg);
-        opacity: 0;
-    }
+  0% {transform:translateY(-50px) rotate(0);}
+  100% {transform:translateY(110vh) rotate(360deg);}
 }
 
-/* ✨ Animación entrada */
-@keyframes fadeIn {
-    from {opacity: 0; transform: translateY(30px);}
-    to {opacity: 1; transform: translateY(0);}
+/* ESCRITURA */
+.show {
+  animation:fade 1s forwards;
+}
+
+@keyframes fade {
+  to {opacity:1;}
+}
+
+/* BOTON SORPRESA */
+#surprise-btn {
+  margin-top:30px;
+  padding:12px;
+  background:#ffd166;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+/* MODAL */
+#modal {
+  display:none;
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.8);
+  justify-content:center;
+  align-items:center;
+}
+
+.modal-box {
+  background:white;
+  padding:30px;
+  border-radius:15px;
+  text-align:center;
 }
 
 </style>
@@ -87,113 +133,91 @@ p {
 
 <body>
 
-<!-- 🌻 RAMO -->
-<div class="ramo">
-    <img src="https://i.imgur.com/8Km9tLL.png">
+<!-- INTRO -->
+<div id="intro">
+  <div class="box">
+    <h2>Hola Danny 🌻</h2>
+    <p>Escribe la clave...</p>
+    <input id="pass" type="password">
+    <br>
+    <button onclick="check()">Entrar</button>
+  </div>
 </div>
 
-<!-- 💌 CARTA -->
-<div class="carta">
+<!-- CARTA -->
+<div class="carta" id="carta">
 
 <h1>Mi Danny</h1>
 
-<p><strong>Amor de Mi Vida y para Mi Vida..</strong></p>
-
+<p>Amor de Mi Vida y para Mi Vida..</p>
 <p>A veces me pongo a pensar… y no sé qué es más doloroso.</p>
-
-<p>Si haber vivido algo tan real contigo… y ahora extrañarlo, o nunca haberlo vivido.</p>
-
-<p>Pero si soy honesto, te volvería a elegir incluso sabiendo cómo termina cada distancia.</p>
-
+<p>Si haber vivido algo tan real contigo… y ahora extrañarlo.</p>
+<p>Pero si soy honesto, te volvería a elegir.</p>
 <p>Porque fuiste… la casualidad más linda de mi vida.</p>
-
-<p>Me diste algo que nadie más ha podido darme. Incluso lograste regalarme el mejor cumpleaños… en medio del caos, de las complicaciones… y de todo lo que no estaba a nuestro favor. Y eso… no se olvida.</p>
-
-<p>Y ahí entendí algo que no estaba listo para aceptar:</p>
-
-<p>Cuando pensé que lo tendría todo… tú ya no estabas.</p>
-
-<p>Y fue en ese momento donde entendí que tú… eras todo.</p>
-
-<p>A veces creo que Dios, o la vida, o la energía… sabía que la única forma de separarnos era poniendo un océano entre nosotros.</p>
-
-<p>Porque de otra forma… no habría sido posible.</p>
-
-<p>Y hay algo que quiero que sepas… de verdad.</p>
-
-<p>El hombre que hoy ves… el que la gente admira, respeta, reconoce… tiene tu nombre escondido en cada logro. Es gracias a ti.</p>
-
-<p>Todo ese crédito es tuyo.</p>
-
-<p>Porque fuiste una mujer increíble en todos los sentidos. Porque tú fuiste parte de eso. Porque tú me construiste en formas que nadie más va a entender.</p>
-
-<p>Y hay algo que quiero que tengas claro.</p>
-
 <p>No tengo corazón… porque te lo di.</p>
-
-<p>Y si soy honesto… creo que te lo llevaste contigo.</p>
-
-<p>Eres la dueña de él… y que yo sepa, aún no me lo has regresado.</p>
-
 <p>Y lo peor… es que ni siquiera quiero que me lo devuelvas.</p>
+<p>Te amo… de esa forma que no se va.</p>
 
-<p>Eres… hermosa… encantadora… todo lo que podría describir como perfecto.</p>
-
-<p>Pero no solo eso…</p>
-
-<p>Eres esa mezcla rara de paz, fuego, dulzura y locura que simplemente… no se repite.</p>
-
-<p><strong>Mi Danny…</strong></p>
-
-<p>Y aunque no te lo diga todos los días… aunque a veces lo disimule… la verdad es que te amo más que nunca.</p>
-
-<p>De esa forma que no se va, que no se olvida.</p>
-
-<p>Te amo de esa forma incómoda… que se queda, que insiste, que no se reemplaza.</p>
-
-<p>Hoy estamos lejos… pero hay cosas que no saben de distancia.</p>
-
-<p>Como ese “hoy y siempre” que alguna vez dijimos… y que yo todavía cumplo en silencio.</p>
-
-<p>Te amo… mujer mía, esposa mía, madre de mis hijos.</p>
-
-<p>Y sí… recuerda la promesa.</p>
-
-<p>Algún día… me vas a hacer papá.</p>
-
-<p>No sé en qué momento leas esto… ni qué estés sintiendo ahora mismo.</p>
-
-<p>Pero si algo quiero que te quede claro es esto:</p>
-
-<p>No fuiste algo bonito que pasó en mi vida…</p>
-
-<p><strong>Fuiste… algo que me cambió para siempre.</strong></p>
-
-<p><em>De tu ingeniero… el que nunca deja de elegirte.</em></p>
+<button id="surprise-btn" onclick="openModal()">💌</button>
 
 </div>
 
-<!-- 🌸 SCRIPT PÉTALOS -->
+<!-- MODAL -->
+<div id="modal">
+  <div class="modal-box">
+    <p>Siempre voy a elegirte… incluso en silencio.</p>
+    <button onclick="closeModal()">Cerrar</button>
+  </div>
+</div>
+
 <script>
 
-function crearPetalo() {
-    const petalo = document.createElement("img");
-    petalo.src = "petalo.png"; // TU IMAGEN
+/* PASSWORD */
+function check(){
+  if(document.getElementById("pass").value==="Danny2025"){
+    document.getElementById("intro").style.display="none";
+    let carta=document.getElementById("carta");
+    carta.style.display="block";
+    setTimeout(()=>carta.style.opacity=1,100);
 
-    petalo.classList.add("petalo");
-
-    petalo.style.left = Math.random() * 100 + "vw";
-    petalo.style.animationDuration = (5 + Math.random() * 5) + "s";
-    petalo.style.width = (15 + Math.random() * 20) + "px";
-
-    document.body.appendChild(petalo);
-
-    setTimeout(() => {
-        petalo.remove();
-    }, 10000);
+    escribir();
+  } else {
+    if(navigator.vibrate) navigator.vibrate(100);
+  }
 }
 
-setInterval(crearPetalo, 300);
+/* ESCRITURA PROGRESIVA */
+function escribir(){
+  let p=document.querySelectorAll("p");
+  p.forEach((el,i)=>{
+    setTimeout(()=>{
+      el.classList.add("show");
+    }, i*800);
+  });
+}
+
+/* PETALOS */
+function crearPetalo(){
+  let p=document.createElement("img");
+  p.src="petalo.png";
+  p.classList.add("petalo");
+  p.style.left=Math.random()*100+"vw";
+  p.style.animationDuration=(5+Math.random()*5)+"s";
+  document.body.appendChild(p);
+
+  setTimeout(()=>p.remove(),8000);
+}
+
+setInterval(crearPetalo,300);
+
+/* MODAL */
+function openModal(){
+  document.getElementById("modal").style.display="flex";
+}
+
+function closeModal(){
+  document.getElementById("modal").style.display="none";
+}
 
 </script>
 
