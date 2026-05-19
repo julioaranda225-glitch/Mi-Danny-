@@ -14,23 +14,37 @@ body {
     padding: 0;
     background: linear-gradient(#fdf6e3, #fff);
     font-family: 'Playfair Display', serif;
-    overflow-x: hidden;
 }
 
-/* 🌻 Fondo decorativo */
-.sunflower {
-    position: fixed;
-    width: 100px;
-    opacity: 0.2;
+/* 🌻 RAMO DE GIRASOLES */
+.ramo {
+    text-align: center;
+    margin-top: 30px;
 }
 
-.sunflower1 { top: 5%; left: 3%; }
-.sunflower2 { bottom: 5%; right: 3%; }
+.ramo img {
+    width: 90px;
+    margin: 0 5px;
+    opacity: 0;
+    transform: translateY(-30px);
+    animation: caer 1s ease forwards;
+}
+
+.ramo img:nth-child(2) { animation-delay: 0.3s; }
+.ramo img:nth-child(3) { animation-delay: 0.6s; }
+.ramo img:nth-child(4) { animation-delay: 0.9s; }
+
+@keyframes caer {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 /* 📜 Carta */
 .carta {
     max-width: 800px;
-    margin: 60px auto;
+    margin: 40px auto;
     padding: 50px;
     background: #fffdf7;
     border-radius: 10px;
@@ -41,33 +55,32 @@ body {
 /* ✍️ Título */
 .titulo {
     font-family: 'Dancing Script', cursive;
-    font-size: 40px;
+    font-size: 42px;
     color: #d4a017;
 }
 
-/* ✨ Párrafos animados */
+/* ✨ Texto animado */
 .parrafo {
     opacity: 0;
     transform: translateY(20px);
-    transition: all 1s ease;
-    margin-bottom: 20px;
+    animation: aparecer 1s ease forwards;
 }
 
-.parrafo.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
+.parrafo:nth-child(1) { animation-delay: 1s; }
+.parrafo:nth-child(2) { animation-delay: 2s; }
+.parrafo:nth-child(3) { animation-delay: 3s; }
+.parrafo:nth-child(4) { animation-delay: 4s; }
+.parrafo:nth-child(5) { animation-delay: 5s; }
+.parrafo:nth-child(6) { animation-delay: 6s; }
+.parrafo:nth-child(7) { animation-delay: 7s; }
+.parrafo:nth-child(8) { animation-delay: 8s; }
+.parrafo:nth-child(9) { animation-delay: 9s; }
 
-/* 🔘 Botón */
-.boton {
-    display: block;
-    margin: 40px auto;
-    padding: 15px 25px;
-    background: #d4a017;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
+@keyframes aparecer {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* 💛 Firma */
@@ -83,22 +96,24 @@ body {
 
 <body>
 
-<img src="https://i.imgur.com/4M7IWwP.png" class="sunflower sunflower1">
-<img src="https://i.imgur.com/4M7IWwP.png" class="sunflower sunflower2">
+<!-- 🌻 RAMO -->
+<div class="ramo">
+    <img src="https://i.imgur.com/4M7IWwP.png">
+    <img src="https://i.imgur.com/4M7IWwP.png">
+    <img src="https://i.imgur.com/4M7IWwP.png">
+    <img src="https://i.imgur.com/4M7IWwP.png">
+</div>
 
 <!-- 🎵 Música -->
-<audio id="musica" loop>
+<audio id="musica" autoplay loop>
   <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mpeg">
 </audio>
 
 <div class="carta">
 
 <div class="titulo">Mi Danny,</div>
+
 <p class="parrafo">Amor de mi vida y para mi vida…</p>
-
-<button class="boton" onclick="iniciar()">Ábrelo solo si estás lista para sentir 💛</button>
-
-<div id="contenido">
 
 <p class="parrafo">A veces me pongo a pensar y no sé qué es más doloroso: si haber vivido algo tan real contigo y ahora extrañarlo, o nunca haberlo vivido. Pero si soy honesto, te volvería a elegir incluso sabiendo cómo termina cada distancia, porque fuiste la casualidad más linda de mi vida.</p>
 
@@ -127,30 +142,6 @@ body {
 <div class="firma">De tu ingeniero 💛</div>
 
 </div>
-</div>
-
-<script>
-
-function iniciar() {
-    const musica = document.getElementById("musica");
-    musica.play();
-
-    const parrafos = document.querySelectorAll(".parrafo");
-
-    let i = 0;
-
-    function mostrar() {
-        if (i < parrafos.length) {
-            parrafos[i].classList.add("visible");
-            i++;
-            setTimeout(mostrar, 1200);
-        }
-    }
-
-    mostrar();
-}
-
-</script>
 
 </body>
 </html>
