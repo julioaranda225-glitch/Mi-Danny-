@@ -15,117 +15,76 @@ body {
   overflow-x:hidden;
 }
 
-/* INTRO */
-#intro {
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:#111;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
+/* 🌻 RAMO */
+.ramo {
+    position: fixed;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 200px;
+    background: url('https://pngimg.com/uploads/sunflower/sunflower_PNG13413.png') no-repeat center/contain;
+    z-index: 10;
+    animation: caerRamo 2.5s ease-out forwards;
 }
 
-.box {
-  background:rgba(255,255,255,0.05);
-  padding:30px;
-  border-radius:15px;
-  text-align:center;
-  color:#fff;
+@keyframes caerRamo {
+    0% {
+        top: -200px;
+        opacity: 0;
+        transform: translateX(-50%) scale(0.5);
+    }
+    60% {
+        top: 90px;
+        opacity: 1;
+        transform: translateX(-50%) scale(1.1);
+    }
+    100% {
+        top: 70px;
+        transform: translateX(-50%) scale(1);
+    }
 }
 
-input {
-  padding:10px;
-  border:none;
-  border-radius:10px;
-  margin-top:10px;
-  width:80%;
-}
-
-button {
-  margin-top:15px;
-  padding:10px 20px;
-  border:none;
-  border-radius:10px;
-  background:#ffd166;
-  cursor:pointer;
-}
-
-/* CARTA */
+/* ✉️ CARTA */
 .carta {
   max-width:700px;
-  margin:120px auto;
+  margin:160px auto;
   background:rgba(255,255,255,0.85);
   padding:40px;
   border-radius:15px;
   box-shadow:0 10px 30px rgba(0,0,0,0.1);
-  display:none;
-  opacity:0;
-  transition:1s;
+  backdrop-filter: blur(5px);
 }
 
-/* TITULO */
+/* ✍️ TEXTO */
 h1 {
   font-family:'Dancing Script', cursive;
   font-size:42px;
 }
 
-/* TEXTO */
 p {
   line-height:1.8;
   margin-bottom:15px;
-  opacity:0;
 }
 
-/* PETALOS */
+/* 🌸 PETALOS */
 .petalo {
-  position:fixed;
-  top:-50px;
-  width:25px;
-  animation:caer linear forwards;
+  position: fixed;
+  top: -50px;
+  width: 25px;
+  pointer-events:none;
+  animation: caer linear forwards;
 }
 
 @keyframes caer {
-  0% {transform:translateY(-50px) rotate(0);}
-  100% {transform:translateY(110vh) rotate(360deg);}
-}
-
-/* ESCRITURA */
-.show {
-  animation:fade 1s forwards;
-}
-
-@keyframes fade {
-  to {opacity:1;}
-}
-
-/* BOTON SORPRESA */
-#surprise-btn {
-  margin-top:30px;
-  padding:12px;
-  background:#ffd166;
-  border:none;
-  border-radius:10px;
-  cursor:pointer;
-}
-
-/* MODAL */
-#modal {
-  display:none;
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.8);
-  justify-content:center;
-  align-items:center;
-}
-
-.modal-box {
-  background:white;
-  padding:30px;
-  border-radius:15px;
-  text-align:center;
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity:1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity:0;
+  }
 }
 
 </style>
@@ -133,91 +92,52 @@ p {
 
 <body>
 
-<!-- INTRO -->
-<div id="intro">
-  <div class="box">
-    <h2>Hola Danny 🌻</h2>
-    <p>Escribe la clave...</p>
-    <input id="pass" type="password">
-    <br>
-    <button onclick="check()">Entrar</button>
-  </div>
-</div>
+<!-- 🌻 RAMO -->
+<div class="ramo"></div>
 
-<!-- CARTA -->
-<div class="carta" id="carta">
+<!-- 💌 CARTA -->
+<div class="carta">
 
 <h1>Mi Danny</h1>
 
-<p>Amor de Mi Vida y para Mi Vida..</p>
+<p><strong>Amor de Mi Vida y para Mi Vida..</strong></p>
+
 <p>A veces me pongo a pensar… y no sé qué es más doloroso.</p>
+
 <p>Si haber vivido algo tan real contigo… y ahora extrañarlo.</p>
-<p>Pero si soy honesto, te volvería a elegir.</p>
+
+<p>Pero si soy honesto, te volvería a elegir incluso sabiendo cómo termina cada distancia.</p>
+
 <p>Porque fuiste… la casualidad más linda de mi vida.</p>
+
 <p>No tengo corazón… porque te lo di.</p>
+
 <p>Y lo peor… es que ni siquiera quiero que me lo devuelvas.</p>
-<p>Te amo… de esa forma que no se va.</p>
 
-<button id="surprise-btn" onclick="openModal()">💌</button>
+<p>Te amo… de esa forma que no se va, que no se olvida.</p>
 
 </div>
 
-<!-- MODAL -->
-<div id="modal">
-  <div class="modal-box">
-    <p>Siempre voy a elegirte… incluso en silencio.</p>
-    <button onclick="closeModal()">Cerrar</button>
-  </div>
-</div>
-
+<!-- 🌸 SCRIPT PETALOS -->
 <script>
 
-/* PASSWORD */
-function check(){
-  if(document.getElementById("pass").value==="Danny2025"){
-    document.getElementById("intro").style.display="none";
-    let carta=document.getElementById("carta");
-    carta.style.display="block";
-    setTimeout(()=>carta.style.opacity=1,100);
-
-    escribir();
-  } else {
-    if(navigator.vibrate) navigator.vibrate(100);
-  }
-}
-
-/* ESCRITURA PROGRESIVA */
-function escribir(){
-  let p=document.querySelectorAll("p");
-  p.forEach((el,i)=>{
-    setTimeout(()=>{
-      el.classList.add("show");
-    }, i*800);
-  });
-}
-
-/* PETALOS */
 function crearPetalo(){
-  let p=document.createElement("img");
-  p.src="petalo.png";
-  p.classList.add("petalo");
-  p.style.left=Math.random()*100+"vw";
-  p.style.animationDuration=(5+Math.random()*5)+"s";
-  document.body.appendChild(p);
+  const petalo = document.createElement("img");
 
-  setTimeout(()=>p.remove(),8000);
+  petalo.src = "https://pngimg.com/uploads/petal/petal_PNG17.png";
+
+  petalo.classList.add("petalo");
+
+  petalo.style.left = Math.random()*100 + "vw";
+  petalo.style.animationDuration = (5 + Math.random()*5) + "s";
+  petalo.style.width = (15 + Math.random()*20) + "px";
+
+  document.body.appendChild(petalo);
+
+  setTimeout(()=>petalo.remove(),8000);
 }
 
 setInterval(crearPetalo,300);
-
-/* MODAL */
-function openModal(){
-  document.getElementById("modal").style.display="flex";
-}
-
-function closeModal(){
-  document.getElementById("modal").style.display="none";
-}
 
 </script>
 
