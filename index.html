@@ -2,191 +2,107 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para Mi Danny 🌻</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Playfair+Display&display=swap" rel="stylesheet">
+<title>Escena Romántica</title>
 
 <style>
-
-/* 🌌 FONDO PAPEL REAL */
-body {
-    margin: 0;
-    padding: 0;
-    background: url('https://i.imgur.com/8Km9tLL.jpg');
-    background-size: cover;
-    font-family: 'Playfair Display', serif;
-    overflow-x: hidden;
-}
-
-/* 🌻 RAMO */
-.ramo {
-    text-align: center;
-    margin-top: 30px;
-}
-
-.ramo img {
-    width: 90px;
-    margin: 0 5px;
-    opacity: 0;
-    transform: translateY(-30px);
-    animation: caerRamo 1s ease forwards;
-}
-
-.ramo img:nth-child(2){animation-delay:.3s;}
-.ramo img:nth-child(3){animation-delay:.6s;}
-.ramo img:nth-child(4){animation-delay:.9s;}
-
-@keyframes caerRamo {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* 📜 CARTA */
-.carta {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 50px;
-    background: rgba(255,253,247,0.95);
-    border-radius: 10px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-    backdrop-filter: blur(2px);
-    line-height: 1.8;
-}
-
-/* ✍️ TITULO */
-.titulo {
-    font-family: 'Dancing Script', cursive;
-    font-size: 42px;
-    color: #d4a017;
-}
-
-/* ⌨️ EFECTO ESCRITURA */
-.linea {
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 2px solid rgba(0,0,0,0.4);
-    width: 0;
-    animation: escribir 4s steps(60,end) forwards, blink .7s infinite;
-}
-
-@keyframes escribir {
-    to { width: 100%; }
-}
-
-@keyframes blink {
-    50% { border-color: transparent; }
-}
-
-/* 💛 FIRMA */
-.firma {
-    margin-top: 40px;
-    font-family: 'Dancing Script', cursive;
-    font-size: 28px;
-    text-align: right;
-}
-
-/* 🌻 PÉTALOS */
-.petalo {
-    position: fixed;
-    top: -50px;
-    pointer-events: none;
-    animation: caer linear infinite;
-    opacity: 0.8;
-}
-
-@keyframes caer {
-    0% {
-        transform: translateY(-50px) rotate(0deg);
-        opacity: 0;
-    }
-    10% { opacity: 1; }
-    100% {
-        transform: translateY(110vh) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-/* 🌙 MODO NOCHE */
-@media (prefers-color-scheme: dark) {
     body {
-        background: #1a1a1a;
+        margin: 0;
+        overflow: hidden;
+        background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+        height: 100vh;
+        font-family: 'Georgia', serif;
     }
-    .carta {
-        background: rgba(40,40,40,0.9);
-        color: #f5f5f5;
-    }
-}
 
+    /* Texto tipo carta */
+    .mensaje {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 28px;
+        text-align: center;
+        max-width: 600px;
+        line-height: 1.5;
+        text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        z-index: 10;
+    }
+
+    /* Contenedor de pétalos */
+    .petalos {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+    }
+
+    .petalo {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        background-image: url('petalo.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        opacity: 0.8;
+        animation: caer linear infinite;
+    }
+
+    /* Animación */
+    @keyframes caer {
+        0% {
+            transform: translateY(-10vh) rotate(0deg);
+            opacity: 0;
+        }
+        10% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(110vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
 </style>
 </head>
 
 <body>
 
-<!-- 🌻 RAMO -->
-<div class="ramo">
-    <img src="https://i.imgur.com/4M7IWwP.png">
-    <img src="https://i.imgur.com/4M7IWwP.png">
-    <img src="https://i.imgur.com/4M7IWwP.png">
-    <img src="https://i.imgur.com/4M7IWwP.png">
+<div class="mensaje">
+    A veces me pongo a pensar…<br>
+    y no sé qué es más doloroso.<br><br>
+
+    Si haber vivido algo tan real contigo…<br>
+    y ahora extrañarlo,<br><br>
+
+    o nunca haberlo vivido.<br><br>
+
+    Pero si soy honesto,<br>
+    te volvería a elegir… siempre.
 </div>
 
-<!-- 🎵 MÚSICA -->
-<audio id="musica" loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mpeg">
-</audio>
-
-<div class="carta">
-
-<div class="titulo">Mi Danny,</div>
-
-<p class="linea">Amor de mi vida y para mi vida…</p>
-<p class="linea">A veces me pongo a pensar y no sé qué es más doloroso…</p>
-<p class="linea">Pero si soy honesto, te volvería a elegir incluso sabiendo cómo termina todo…</p>
-<p class="linea">Porque fuiste la casualidad más linda de mi vida.</p>
-<p class="linea">Me diste algo que nadie más ha podido darme…</p>
-<p class="linea">Y entendí que tú… eras todo.</p>
-<p class="linea">El hombre que hoy ves tiene tu nombre en cada logro…</p>
-<p class="linea">No tengo corazón, porque te lo di.</p>
-<p class="linea">Eres esa mezcla perfecta que no se repite…</p>
-<p class="linea">Te amo más que nunca.</p>
-<p class="linea">Hoy estamos lejos… pero no en lo que importa.</p>
-<p class="linea">Hoy y siempre.</p>
-<p class="linea">Algún día… me vas a hacer papá.</p>
-<p class="linea">No fuiste algo bonito… fuiste algo eterno.</p>
-
-<div class="firma">De tu ingeniero 💛</div>
-
-</div>
+<div class="petalos" id="petalos"></div>
 
 <script>
+    const contenedor = document.getElementById("petalos");
 
-/* 🎵 ACTIVAR MÚSICA SUAVE */
-document.body.addEventListener("click", () => {
-    const musica = document.getElementById("musica");
-    musica.volume = 0.2;
-    musica.play();
-});
+    function crearPetalo() {
+        const petalo = document.createElement("div");
+        petalo.classList.add("petalo");
 
-/* 🌻 PÉTALOS */
-function crearPetalo() {
-    const petalo = document.createElement("img");
-    petalo.src = "https://i.imgur.com/4M7IWwP.png";
-    petalo.classList.add("petalo");
+        petalo.style.left = Math.random() * 100 + "vw";
+        petalo.style.animationDuration = (5 + Math.random() * 5) + "s";
+        petalo.style.width = (20 + Math.random() * 30) + "px";
+        petalo.style.height = petalo.style.width;
 
-    petalo.style.left = Math.random() * 100 + "vw";
-    petalo.style.width = (20 + Math.random() * 30) + "px";
-    petalo.style.animationDuration = (6 + Math.random() * 6) + "s";
+        contenedor.appendChild(petalo);
 
-    document.body.appendChild(petalo);
+        setTimeout(() => {
+            petalo.remove();
+        }, 10000);
+    }
 
-    setTimeout(() => petalo.remove(), 12000);
-}
-
-setInterval(crearPetalo, 500);
-
+    setInterval(crearPetalo, 300);
 </script>
 
 </body>
