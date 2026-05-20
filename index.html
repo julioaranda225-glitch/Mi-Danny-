@@ -44,7 +44,9 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: opacity 1s ease-in-out, visibility 1s;
+            transition: opacity 0.8s ease-in-out;
+            opacity: 1;
+            visibility: visible;
         }
 
         .sunflower-garden {
@@ -69,14 +71,13 @@
 
         .welcome-box {
             text-align: center;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             padding: 3rem;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             border: 3px solid var(--primary-yellow);
             z-index: 10;
             max-width: 90%;
-            transform: scale(1);
             animation: pulseBox 2s infinite alternate;
         }
 
@@ -102,13 +103,15 @@
             background: var(--primary-yellow);
             color: var(--text-dark);
             border: none;
-            padding: 12px 35px;
+            padding: 15px 40px;
             font-size: 1.2rem;
             font-weight: 600;
             border-radius: 30px;
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
             transition: all 0.3s ease;
+            position: relative;
+            z-index: 20;
         }
 
         .enter-btn:hover {
@@ -122,12 +125,14 @@
             max-width: 800px;
             margin: 4rem auto;
             padding: 0 20px;
+            display: none; /* Oculto inicialmente para evitar bugs visuales */
             opacity: 0;
-            transform: translateY(50px);
-            transition: all 1.5s ease-out;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
         }
 
         .main-container.visible {
+            display: block;
             opacity: 1;
             transform: translateY(0);
         }
@@ -271,7 +276,7 @@
 <body>
 
     <div id="welcome-screen">
-        <div class="sunflower-garden" id="garden-bg">
+        <div class="sunflower-garden">
             <span class="bg-sunflower" style="top: 10%; left: 10%;">🌻</span>
             <span class="bg-sunflower" style="top: 15%; right: 15%; animation-delay: 1s;">🌻</span>
             <span class="bg-sunflower" style="bottom: 15%; left: 12%; animation-delay: 0.5s;">🌻</span>
@@ -283,7 +288,7 @@
         <div class="welcome-box">
             <h1>Para mi persona favorita 🩵</h1>
             <p>Danny, la distancia separa cuerpos, pero no almas. Abre esto cuando estés lista.</p>
-            <button class="enter-btn" onclick="revealLetter()">Abrir la carta</button>
+            <button class="enter-btn" id="btn-abrir">Abrir la carta</button>
         </div>
     </div>
 
@@ -335,6 +340,7 @@
             <h3>Un mensaje en movimiento desde Colombia</h3>
             <div class="video-wrapper">
                 <iframe 
+                    id="video-player"
                     src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0" 
                     title="Mensaje especial para Danny" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -345,4 +351,60 @@
 
     </div>
 
-    <audio id="background
+    <audio id="background-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Manejador del evento clic robusto y directo asignado por ID de JS
+        document.getElementById('btn-abrir').addEventListener('click', function() {
+            const welcomeScreen = document.getElementById('welcome-screen');
+            const mainContent = document.getElementById('main-content');
+            const music = document.getElementById('background-music');
+
+            // 1. Forzar desvanecimiento visual
+            welcomeScreen.style.opacity = '0';
+            
+            // 2. Ejecutar cambio de estado del DOM inmediatamente
+            mainContent.style.display = 'block';
+            
+            setTimeout(() => {
+                welcomeScreen.style.display = 'none'; // Quita la pantalla por completo para liberar clics
+                mainContent.classList.add('visible');
+            }, 800);
+
+            // 3. Intento seguro de reproducir música sin romper el script
+            if(music) {
+                music.volume = 0.3;
+                music.play().catch(err => console.log("Audio en espera de permisos explícitos"));
+            }
+        });
+
+        // Estela interactiva del mouse (Girasoles y corazones)
+        document.addEventListener('mousemove', function(e) {
+            if (Math.random() > 0.88) { 
+                const petal = document.createElement('span');
+                petal.className = 'petal';
+                
+                const pool = ['🌻', '🩵', '✨', '🌻'];
+                petal.innerText = pool[Math.floor(Math.random() * pool.length)];
+
+                petal.style.left = e.clientX + 'px';
+                petal.style.top = e.clientY + 'px';
+
+                const movementX = (Math.random() - 0.5) * 150;
+                const movementY = (Math.random() * 150) + 50; 
+                const rotation = (Math.random() - 0.5) * 360;
+
+                petal.style.setProperty('--mx', `${movementX}px`);
+                petal.style.setProperty('--my', `${movementY}px`);
+                petal.style.setProperty('--rt', `${rotation}deg`);
+
+                document.body.appendChild(petal);
+
+                setTimeout(() => { petal.remove(); }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>
