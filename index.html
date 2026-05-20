@@ -10,64 +10,70 @@
 
 body{
   margin:0;
-  background:#f5e6c8;
+  background:#efe2c5;
   font-family:'Playfair Display', serif;
   display:flex;
   justify-content:center;
   align-items:center;
-  height:100vh;
-  overflow:hidden;
+  min-height:100vh;
+  overflow-x:hidden;
 }
 
 /* CARTA */
 .carta{
-  width:800px;
-  max-width:90%;
-  padding:60px;
+  width:850px;
+  max-width:92%;
+  padding:70px;
   background:#fdf6e3;
-  border-radius:10px;
-  box-shadow:0 10px 40px rgba(0,0,0,0.2);
+  border-radius:8px;
+  box-shadow:0 15px 50px rgba(0,0,0,0.25);
   position:relative;
-  overflow:hidden;
-  animation:fadeIn 2s ease;
+  animation:entrada 2s ease;
 }
 
-/* EFECTO PAPEL */
+/* TEXTURA SUAVE */
 .carta::before{
   content:"";
   position:absolute;
   inset:0;
-  background:radial-gradient(circle at top, rgba(255,200,100,0.15), transparent);
+  background:radial-gradient(circle at top, rgba(255,200,120,0.15), transparent);
 }
 
 /* TITULO */
 h1{
   font-family:'Dancing Script', cursive;
-  font-size:48px;
+  font-size:52px;
   color:#7a4e2d;
-  margin-bottom:20px;
+  margin-bottom:25px;
 }
 
 /* TEXTO */
 p{
   font-size:18px;
-  color:#3b2a1a;
-  line-height:1.7;
-  margin:12px 0;
+  color:#3e2c1c;
+  line-height:1.8;
+  margin:14px 0;
   opacity:0;
+  transform:translateY(10px);
   animation:aparecer 1s forwards;
 }
 
 /* RETRASO PROGRESIVO */
-p:nth-child(2){animation-delay:1s;}
-p:nth-child(3){animation-delay:2s;}
-p:nth-child(4){animation-delay:3s;}
-p:nth-child(5){animation-delay:4s;}
-p:nth-child(6){animation-delay:5s;}
-p:nth-child(7){animation-delay:6s;}
-p:nth-child(8){animation-delay:7s;}
-p:nth-child(9){animation-delay:8s;}
-p:nth-child(10){animation-delay:9s;}
+p:nth-of-type(1){animation-delay:1s;}
+p:nth-of-type(2){animation-delay:2s;}
+p:nth-of-type(3){animation-delay:3s;}
+p:nth-of-type(4){animation-delay:4s;}
+p:nth-of-type(5){animation-delay:5s;}
+p:nth-of-type(6){animation-delay:6s;}
+p:nth-of-type(7){animation-delay:7s;}
+p:nth-of-type(8){animation-delay:8s;}
+p:nth-of-type(9){animation-delay:9s;}
+p:nth-of-type(10){animation-delay:10s;}
+p:nth-of-type(11){animation-delay:11s;}
+p:nth-of-type(12){animation-delay:12s;}
+p:nth-of-type(13){animation-delay:13s;}
+p:nth-of-type(14){animation-delay:14s;}
+p:nth-of-type(15){animation-delay:15s;}
 
 /* FIRMA */
 .firma{
@@ -77,15 +83,15 @@ p:nth-child(10){animation-delay:9s;}
   text-align:right;
   color:#7a4e2d;
   opacity:0;
-  animation:aparecer 2s forwards 10s;
+  animation:aparecer 2s forwards 16s;
 }
 
 /* HOJAS */
 .hoja{
   position:fixed;
   top:-50px;
-  width:20px;
-  opacity:0.6;
+  width:18px;
+  opacity:0.5;
   animation:caer linear forwards;
 }
 
@@ -95,12 +101,31 @@ p:nth-child(10){animation-delay:9s;}
   }
 }
 
-/* ANIMACIONES */
-@keyframes aparecer{
-  to{opacity:1;}
+/* FINAL */
+#final{
+  position:fixed;
+  inset:0;
+  background:#0a0a0f;
+  color:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  font-size:28px;
+  padding:40px;
+  opacity:0;
+  transition:2s;
 }
 
-@keyframes fadeIn{
+/* ANIMACIONES */
+@keyframes aparecer{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes entrada{
   from{opacity:0; transform:scale(0.98);}
   to{opacity:1; transform:scale(1);}
 }
@@ -110,9 +135,8 @@ p:nth-child(10){animation-delay:9s;}
 
 <body>
 
-<!-- MUSICA -->
 <audio autoplay loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3">
 </audio>
 
 <div class="carta">
@@ -121,47 +145,65 @@ p:nth-child(10){animation-delay:9s;}
 
 <p>Amor de mi vida y para mi vida…</p>
 
-<p>A veces me pongo a pensar y no sé qué es más doloroso… si haberte vivido o ahora extrañarte.</p>
+<p>A veces me pongo a pensar y no sé qué es más doloroso: si haber vivido algo tan real contigo y ahora extrañarlo, o nunca haberlo vivido. Pero si soy honesto, te volvería a elegir incluso sabiendo cómo termina cada distancia, porque fuiste la casualidad más linda de mi vida.</p>
 
-<p>Pero incluso sabiendo cómo termina cada distancia… te volvería a elegir.</p>
+<p>Me diste algo que nadie más ha podido darme. Incluso lograste regalarme el mejor cumpleaños en medio del caos, de las complicaciones y de todo lo que no estaba a nuestro favor. Y eso no se olvida.</p>
 
-<p>Porque fuiste la casualidad más linda de mi vida.</p>
+<p>Fue ahí cuando entendí algo que no estaba listo para aceptar. Cuando pensé que lo tendría todo, tú ya no estabas. Y en ese momento comprendí que tú eras todo.</p>
 
-<p>Me diste algo que nadie más ha podido darme…</p>
+<p>A veces creo que Dios, la vida o la energía sabía que la única forma de separarnos era poniendo un océano entre nosotros, porque de otra forma simplemente no habría sido posible.</p>
 
-<p>Incluso el mejor cumpleaños… en medio del caos.</p>
+<p>Quiero que sepas algo de verdad. El hombre que hoy ves, el que la gente admira, respeta y reconoce, tiene tu nombre escondido en cada logro. Es gracias a ti. Todo ese crédito es tuyo, porque fuiste una mujer increíble en todos los sentidos, porque tú fuiste parte de esto, porque tú me construiste en formas que nadie más va a entender.</p>
 
-<p>Y eso… no se olvida.</p>
+<p>Y hay algo que quiero que tengas claro. No tengo corazón, porque te lo di. Y si soy honesto, creo que te lo llevaste contigo. Eres la dueña de él y, que yo sepa, aún no me lo has regresado. Y lo peor es que ni siquiera quiero que me lo devuelvas.</p>
 
-<p>Hoy estamos lejos… pero hay cosas que no saben de distancia.</p>
+<p>Eres hermosa, encantadora, todo lo que podría describir como perfecto. Pero no solo eso… eres esa mezcla rara de paz, fuego, dulzura y locura que simplemente no se repite. Mi Danny…</p>
 
-<p>Como lo que siento por ti.</p>
+<p>Y aunque no te lo diga todos los días, aunque a veces lo disimule, la verdad es que te amo más que nunca. No de una forma pasajera, sino de esa forma que no se va, que no se olvida. Te amo de esa forma incómoda que se queda, que insiste y que no se reemplaza.</p>
 
-<p>Te amo… de esa forma que se queda… que insiste… que no se reemplaza.</p>
+<p>Hoy estamos lejos, pero hay cosas que no saben de distancia, como lo que siento por ti, como ese “hoy y siempre” que alguna vez dijimos y que yo todavía cumplo en silencio.</p>
+
+<p>Te amo… mujer mía, esposa mía, madre de mis hijos.</p>
+
+<p>Y sí, recuerda la promesa. Algún día me vas a hacer papá.</p>
+
+<p>No sé en qué momento leas esto ni qué estés sintiendo ahora mismo, pero si algo quiero que te quede claro es esto: no fuiste algo bonito que pasó en mi vida… fuiste algo que me cambió para siempre.</p>
 
 <div class="firma">
-De tu ingeniero… 🤍
+De tu ingeniero,<br>
+el que nunca deja de elegirte.
 </div>
 
+</div>
+
+<div id="final">
+Algunas historias no terminan…<br><br>
+solo aprenden a doler bonito.
 </div>
 
 <script>
 
-/* HOJAS CAYENDO */
+/* HOJAS */
 function hoja(){
   let h=document.createElement("img");
   h.src="https://i.ibb.co/7QpKsCX/petalo.png";
   h.classList.add("hoja");
 
   h.style.left=Math.random()*100+"vw";
-  h.style.animationDuration=(6+Math.random()*4)+"s";
+  h.style.animationDuration=(7+Math.random()*5)+"s";
 
   document.body.appendChild(h);
 
-  setTimeout(()=>h.remove(),10000);
+  setTimeout(()=>h.remove(),12000);
 }
 
-setInterval(hoja,300);
+setInterval(hoja,400);
+
+/* FINAL */
+setTimeout(()=>{
+  document.body.style.filter="blur(4px)";
+  document.getElementById("final").style.opacity=1;
+},26000);
 
 </script>
 
