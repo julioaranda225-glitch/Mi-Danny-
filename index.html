@@ -408,4 +408,98 @@
             </div>
         </article>
 
-        <section class="video-section
+        <section class="video-section">
+            <h3>Para que me sientas un poquito más cerca de ti</h3>
+            <h3>https://www.youtube.com/watch?v=_33z-zE3qGo</h3>
+            <div class="video-wrapper">
+                <iframe 
+                    id="video-player"
+                    src="https://www.youtube.com/embed/_33z-zE3qGo?rel=0&enablejsapi=1"
+                    title="Mensaje especial para Danny" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+    </div>
+
+    <div class="music-hidden">
+        <iframe 
+            id="youtube-audio"
+            src="https://www.youtube.com/embed/cs0_s6o8uAI?enablejsapi=1&loop=1&playlist=cs0_s6o8uAI,7s4pK3s8-lE" 
+            allow="autoplay">
+        </iframe>
+    </div>
+
+    <script>
+        // Función principal al abrir la carta
+        document.getElementById('btn-abrir').addEventListener('click', function() {
+            const welcomeScreen = document.getElementById('welcome-screen');
+            const mainContent = document.getElementById('main-content');
+            const rainLayer = document.getElementById('rain-layer');
+            
+            welcomeScreen.style.opacity = '0';
+            mainContent.style.display = 'block';
+            rainLayer.style.display = 'block'; 
+            
+            setTimeout(() => {
+                welcomeScreen.style.display = 'none'; 
+                mainContent.classList.add('visible');
+                createAmbientRain(); 
+            }, 800);
+
+            const audioIframe = document.getElementById('youtube-audio');
+            if (audioIframe) {
+                audioIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            }
+        });
+
+        // Generador de Lluvia Infinita de Fondo (Girasoles y Destellos)
+        function createAmbientRain() {
+            const rainLayer = document.getElementById('rain-layer');
+            const elements = ['🌻', '✨', '🩵', '🌻'];
+            
+            setInterval(() => {
+                const particle = document.createElement('span');
+                particle.className = 'falling-element';
+                particle.innerText = elements[Math.floor(Math.random() * elements.length)];
+                
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDuration = (Math.random() * 3 + 4) + 's'; 
+                particle.style.fontSize = (Math.random() * 1 + 1) + 'rem';
+                
+                rainLayer.appendChild(particle);
+                
+                setTimeout(() => { particle.remove(); }, 7000);
+            }, 400); 
+        }
+
+        // Estela interactiva adicional en el cursor del mouse
+        document.addEventListener('mousemove', function(e) {
+            if (Math.random() > 0.88) { 
+                const petal = document.createElement('span');
+                petal.className = 'petal';
+                
+                const pool = ['🌻', '🩵', '✨', '🌻'];
+                petal.innerText = pool[Math.floor(Math.random() * pool.length)];
+
+                petal.style.left = e.clientX + 'px';
+                petal.style.top = e.clientY + 'px';
+
+                const movementX = (Math.random() - 0.5) * 150;
+                const movementY = (Math.random() * 150) + 50; 
+                const rotation = (Math.random() - 0.5) * 360;
+
+                petal.style.setProperty('--mx', `${movementX}px`);
+                petal.style.setProperty('--my', `${movementY}px`);
+                petal.style.setProperty('--rt', `${rotation}deg`);
+
+                document.body.appendChild(petal);
+
+                setTimeout(() => { petal.remove(); }, 1200);
+            }
+        });
+    </script>
+</body>
+</html>
