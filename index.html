@@ -44,7 +44,7 @@ body{
   position:fixed;
   width:600px;
   height:600px;
-  background:radial-gradient(circle, rgba(255,209,102,0.2), transparent);
+  background:radial-gradient(circle, rgba(255,209,102,0.25), transparent);
   top:-200px;
   left:-200px;
   animation:luzMove 10s infinite alternate;
@@ -53,10 +53,10 @@ body{
 /* 🌻 RAMO */
 .ramo{
   position:fixed;
-  top:80px;
+  top:60px;
   left:50%;
   transform:translateX(-50%) scale(0.8);
-  width:260px;
+  width:240px;
   opacity:0;
   filter:blur(20px);
   animation:ramoIn 2s ease 2s forwards;
@@ -86,13 +86,15 @@ h2{
 
 p{
   opacity:0;
+  margin:10px 0;
 }
 
 /* 🌸 PETALOS */
 .petalo{
   position:fixed;
   top:-50px;
-  width:22px;
+  width:18px;
+  opacity:0.85;
   pointer-events:none;
   animation:fall linear forwards;
 }
@@ -133,14 +135,18 @@ p{
 
 <body>
 
+<!-- INTRO -->
 <div id="intro">
   <h1>Hay cosas que nunca se olvidan…</h1>
 </div>
 
+<!-- LUZ -->
 <div class="luz"></div>
 
-<img class="ramo" src="https://pngimg.com/uploads/sunflower/sunflower_PNG13413.png">
+<!-- RAMO -->
+<img class="ramo" src="https://i.ibb.co/6y7nZQx/ramo-girasoles.png">
 
+<!-- CARTA -->
 <div class="carta">
   <h2>Mi Danny</h2>
 
@@ -155,7 +161,7 @@ p{
 
 <script>
 
-/* 🎬 CONTROL INTRO */
+/* 🎬 INTRO */
 setTimeout(()=>{
   document.getElementById("intro").style.display="none";
   escribir();
@@ -174,18 +180,19 @@ function escribir(){
 /* 🌸 PETALOS PRO */
 function petalo(){
   let p=document.createElement("img");
-  p.src="https://pngimg.com/uploads/petal/petal_PNG17.png";
+  p.src="https://i.ibb.co/7QpKsCX/petalo.png";
   p.classList.add("petalo");
 
   p.style.left=Math.random()*100+"vw";
-  p.style.animationDuration=(6+Math.random()*4)+"s";
+  p.style.animationDuration=(5+Math.random()*5)+"s";
+  p.style.transform="rotate("+Math.random()*360+"deg+")";
 
   document.body.appendChild(p);
 
-  setTimeout(()=>p.remove(),9000);
+  setTimeout(()=>p.remove(),10000);
 }
 
-setInterval(petalo,200);
+setInterval(petalo,180);
 
 </script>
 
