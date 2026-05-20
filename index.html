@@ -2,110 +2,107 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Para Mi Danny 🎂</title>
+<title>Mi Danny</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Dancing+Script&display=swap" rel="stylesheet">
 
 <style>
 
 body{
   margin:0;
-  background:#0a0a0f;
-  overflow:hidden;
-  font-family:'Inter', sans-serif;
-  color:#fff;
-}
-
-/* INTRO */
-#intro{
-  position:fixed;
-  width:100%;
-  height:100%;
+  background:#f5e6c8;
+  font-family:'Playfair Display', serif;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:#0a0a0f;
-  z-index:999;
-}
-
-#intro h1{
-  font-weight:300;
-  letter-spacing:2px;
-  opacity:0;
-  animation:fadeIn 2s forwards;
-}
-
-/* LUZ */
-.luz{
-  position:fixed;
-  width:500px;
-  height:500px;
-  background:radial-gradient(circle, rgba(255,200,100,0.25), transparent);
-  pointer-events:none;
-  transition:0.2s;
+  height:100vh;
+  overflow:hidden;
 }
 
 /* CARTA */
 .carta{
+  width:800px;
+  max-width:90%;
+  padding:60px;
+  background:#fdf6e3;
+  border-radius:10px;
+  box-shadow:0 10px 40px rgba(0,0,0,0.2);
   position:relative;
-  max-width:750px;
-  margin:150px auto;
-  padding:50px;
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(15px);
-  border-radius:20px;
-  box-shadow:0 10px 50px rgba(0,0,0,0.6);
-  opacity:0;
-  transform:translateY(40px);
-  animation:entrada 2s ease 3s forwards;
+  overflow:hidden;
+  animation:fadeIn 2s ease;
+}
+
+/* EFECTO PAPEL */
+.carta::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at top, rgba(255,200,100,0.15), transparent);
 }
 
 /* TITULO */
-h2{
-  font-family:'Dancing Script';
-  font-size:46px;
-  color:#ffd166;
+h1{
+  font-family:'Dancing Script', cursive;
+  font-size:48px;
+  color:#7a4e2d;
+  margin-bottom:20px;
 }
 
 /* TEXTO */
 p{
-  opacity:0;
+  font-size:18px;
+  color:#3b2a1a;
+  line-height:1.7;
   margin:12px 0;
-  line-height:1.6;
+  opacity:0;
+  animation:aparecer 1s forwards;
 }
 
-/* PETALOS */
-.petalo{
+/* RETRASO PROGRESIVO */
+p:nth-child(2){animation-delay:1s;}
+p:nth-child(3){animation-delay:2s;}
+p:nth-child(4){animation-delay:3s;}
+p:nth-child(5){animation-delay:4s;}
+p:nth-child(6){animation-delay:5s;}
+p:nth-child(7){animation-delay:6s;}
+p:nth-child(8){animation-delay:7s;}
+p:nth-child(9){animation-delay:8s;}
+p:nth-child(10){animation-delay:9s;}
+
+/* FIRMA */
+.firma{
+  margin-top:40px;
+  font-family:'Dancing Script';
+  font-size:28px;
+  text-align:right;
+  color:#7a4e2d;
+  opacity:0;
+  animation:aparecer 2s forwards 10s;
+}
+
+/* HOJAS */
+.hoja{
   position:fixed;
   top:-50px;
-  width:18px;
-  opacity:0.8;
-  animation:fall linear forwards;
+  width:20px;
+  opacity:0.6;
+  animation:caer linear forwards;
 }
 
-/* FINAL */
-#final{
-  position:fixed;
-  width:100%;
-  height:100%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  background:#0a0a0f;
-  opacity:0;
-  font-size:30px;
-  padding:40px;
-  transition:2s;
-  z-index:1000;
+@keyframes caer{
+  to{
+    transform:translateY(110vh) rotate(360deg);
+  }
 }
 
 /* ANIMACIONES */
-@keyframes fadeIn{to{opacity:1;}}
-@keyframes entrada{to{opacity:1; transform:translateY(0);}}
-@keyframes fall{
-  0%{transform:translate(0,-50px) rotate(0);}
-  100%{transform:translate(100px,110vh) rotate(360deg);}
+@keyframes aparecer{
+  to{opacity:1;}
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:scale(0.98);}
+  to{opacity:1; transform:scale(1);}
 }
 
 </style>
@@ -114,104 +111,57 @@ p{
 <body>
 
 <!-- MUSICA -->
-<audio id="musica" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+<audio autoplay loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">
 </audio>
 
-<!-- INTRO -->
-<div id="intro">
-  <h1>Hoy no es un día cualquiera…</h1>
-</div>
-
-<!-- LUZ -->
-<div class="luz" id="luz"></div>
-
-<!-- CARTA -->
 <div class="carta">
-  <h2>Mi Danny,</h2>
 
-  <p>Amor de mi vida y para mi vida…</p>
+<h1>Mi Danny,</h1>
 
-  <p>A veces me pongo a pensar y no sé qué es más doloroso: si haber vivido algo tan real contigo y ahora extrañarlo, o nunca haberlo vivido.</p>
+<p>Amor de mi vida y para mi vida…</p>
 
-  <p>Pero si soy honesto, te volvería a elegir incluso sabiendo cómo termina cada distancia…</p>
+<p>A veces me pongo a pensar y no sé qué es más doloroso… si haberte vivido o ahora extrañarte.</p>
 
-  <p>porque fuiste la casualidad más linda de mi vida.</p>
+<p>Pero incluso sabiendo cómo termina cada distancia… te volvería a elegir.</p>
 
-  <p>Me diste algo que nadie más ha podido darme… incluso el mejor cumpleaños en medio del caos.</p>
+<p>Porque fuiste la casualidad más linda de mi vida.</p>
 
-  <p>Y eso no se olvida.</p>
+<p>Me diste algo que nadie más ha podido darme…</p>
 
-  <p>Cuando pensé que lo tendría todo… tú ya no estabas.</p>
+<p>Incluso el mejor cumpleaños… en medio del caos.</p>
 
-  <p>Y ahí entendí algo… tú eras todo.</p>
+<p>Y eso… no se olvida.</p>
 
-  <p>Hoy estamos lejos… pero hay cosas que no saben de distancia.</p>
+<p>Hoy estamos lejos… pero hay cosas que no saben de distancia.</p>
 
-  <p>Como lo que siento por ti.</p>
+<p>Como lo que siento por ti.</p>
 
-  <p>Te amo… no de una forma pasajera…</p>
+<p>Te amo… de esa forma que se queda… que insiste… que no se reemplaza.</p>
 
-  <p>sino de esa forma que se queda, que insiste y que no se reemplaza.</p>
-
-  <p>Eres y siempre serás…</p>
-
-  <p><b>mi casualidad favorita.</b></p>
-
+<div class="firma">
+De tu ingeniero… 🤍
 </div>
 
-<!-- FINAL -->
-<div id="final">
-  Y si algún día dudas de lo que fuimos…<br><br>
-  recuerda esto:<br><br>
-  <b>nadie va a amarte como yo lo hice.</b>
 </div>
 
 <script>
 
-/* INICIAR */
-setTimeout(()=>{
-  document.getElementById("intro").style.display="none";
-  document.getElementById("musica").play();
-  escribir();
-},2500);
+/* HOJAS CAYENDO */
+function hoja(){
+  let h=document.createElement("img");
+  h.src="https://i.ibb.co/7QpKsCX/petalo.png";
+  h.classList.add("hoja");
 
-/* TEXTO PROGRESIVO */
-function escribir(){
-  let p=document.querySelectorAll("p");
-  p.forEach((el,i)=>{
-    setTimeout(()=>{
-      el.style.opacity=1;
-    },i*800);
-  });
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=(6+Math.random()*4)+"s";
+
+  document.body.appendChild(h);
+
+  setTimeout(()=>h.remove(),10000);
 }
 
-/* PETALOS */
-function petalo(){
-  let p=document.createElement("img");
-  p.src="https://i.ibb.co/7QpKsCX/petalo.png";
-  p.classList.add("petalo");
-
-  p.style.left=Math.random()*100+"vw";
-  p.style.animationDuration=(6+Math.random()*4)+"s";
-
-  document.body.appendChild(p);
-  setTimeout(()=>p.remove(),10000);
-}
-setInterval(petalo,200);
-
-/* EFECTO MOUSE */
-document.addEventListener("mousemove", e=>{
-  let luz=document.getElementById("luz");
-  luz.style.left=(e.clientX-250)+"px";
-  luz.style.top=(e.clientY-250)+"px";
-});
-
-/* FINAL */
-setTimeout(()=>{
-  document.body.style.filter="blur(6px)";
-  document.getElementById("final").style.opacity=1;
-},20000);
+setInterval(hoja,300);
 
 </script>
 
