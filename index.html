@@ -2,25 +2,21 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Para Mi Danny 🌻</title>
+<title>Para Mi Danny 🎂</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 
-:root{
-  --gold:#ffd166;
-}
-
 body{
   margin:0;
-  background:#0f0f14;
+  background:#0a0a0f;
   overflow:hidden;
   font-family:'Inter', sans-serif;
   color:#fff;
 }
 
-/* 🎬 INTRO */
+/* INTRO */
 #intro{
   position:fixed;
   width:100%;
@@ -28,7 +24,7 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  background:#0f0f14;
+  background:#0a0a0f;
   z-index:999;
 }
 
@@ -39,67 +35,55 @@ body{
   animation:fadeIn 2s forwards;
 }
 
-/* 🌅 LUZ DINÁMICA */
+/* LUZ */
 .luz{
   position:fixed;
-  width:600px;
-  height:600px;
-  background:radial-gradient(circle, rgba(255,209,102,0.25), transparent);
+  width:500px;
+  height:500px;
+  background:radial-gradient(circle, rgba(255,200,100,0.25), transparent);
   pointer-events:none;
   transition:0.2s;
 }
 
-/* 🌻 RAMO */
-.ramo{
-  position:fixed;
-  top:60px;
-  left:50%;
-  transform:translateX(-50%) scale(0.8);
-  width:240px;
-  opacity:0;
-  filter:blur(20px);
-  animation:ramoIn 2s ease 2s forwards;
-  transition:0.3s;
-}
-
-/* 💌 CARTA */
+/* CARTA */
 .carta{
   position:relative;
-  max-width:700px;
-  margin:200px auto;
-  padding:40px;
+  max-width:750px;
+  margin:150px auto;
+  padding:50px;
   background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(12px);
+  backdrop-filter:blur(15px);
   border-radius:20px;
-  box-shadow:0 10px 40px rgba(0,0,0,0.6);
+  box-shadow:0 10px 50px rgba(0,0,0,0.6);
   opacity:0;
-  transform:translateY(50px);
+  transform:translateY(40px);
   animation:entrada 2s ease 3s forwards;
 }
 
-/* TEXTO */
+/* TITULO */
 h2{
   font-family:'Dancing Script';
-  font-size:44px;
-  color:var(--gold);
+  font-size:46px;
+  color:#ffd166;
 }
 
+/* TEXTO */
 p{
   opacity:0;
-  margin:10px 0;
+  margin:12px 0;
+  line-height:1.6;
 }
 
-/* 🌸 PETALOS */
+/* PETALOS */
 .petalo{
   position:fixed;
   top:-50px;
   width:18px;
-  opacity:0.85;
-  pointer-events:none;
+  opacity:0.8;
   animation:fall linear forwards;
 }
 
-/* 🎭 FINAL */
+/* FINAL */
 #final{
   position:fixed;
   width:100%;
@@ -107,33 +91,21 @@ p{
   display:flex;
   justify-content:center;
   align-items:center;
-  background:#0f0f14;
-  color:#fff;
-  font-size:28px;
   text-align:center;
+  background:#0a0a0f;
   opacity:0;
-  z-index:1000;
-  transition:2s;
+  font-size:30px;
   padding:40px;
+  transition:2s;
+  z-index:1000;
 }
 
 /* ANIMACIONES */
-
 @keyframes fadeIn{to{opacity:1;}}
-@keyframes ramoIn{
-  to{
-    opacity:1;
-    filter:blur(0);
-    transform:translateX(-50%) scale(1);
-  }
-}
-@keyframes entrada{
-  to{opacity:1; transform:translateY(0);}
-}
+@keyframes entrada{to{opacity:1; transform:translateY(0);}}
 @keyframes fall{
   0%{transform:translate(0,-50px) rotate(0);}
-  50%{transform:translate(80px,50vh) rotate(180deg);}
-  100%{transform:translate(-120px,110vh) rotate(360deg);}
+  100%{transform:translate(100px,110vh) rotate(360deg);}
 }
 
 </style>
@@ -141,92 +113,105 @@ p{
 
 <body>
 
-<!-- 🎵 MÚSICA -->
-<audio id="musica" autoplay loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+<!-- MUSICA -->
+<audio id="musica" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
 </audio>
 
 <!-- INTRO -->
 <div id="intro">
-  <h1>Hay cosas que nunca se olvidan…</h1>
+  <h1>Hoy no es un día cualquiera…</h1>
 </div>
 
 <!-- LUZ -->
 <div class="luz" id="luz"></div>
 
-<!-- RAMO -->
-<img class="ramo" id="ramo" src="https://i.ibb.co/6y7nZQx/ramo-girasoles.png">
-
 <!-- CARTA -->
 <div class="carta">
-  <h2>Mi Danny</h2>
+  <h2>Mi Danny,</h2>
 
-  <p>Amor de Mi Vida y para Mi Vida..</p>
-  <p>A veces me pongo a pensar…</p>
-  <p>y no sé qué es más difícil…</p>
-  <p>olvidarte… o aceptar que no quiero hacerlo.</p>
-  <p>Porque si volviera atrás…</p>
-  <p>te elegiría otra vez.</p>
-  <p>Sin dudarlo.</p>
+  <p>Amor de mi vida y para mi vida…</p>
+
+  <p>A veces me pongo a pensar y no sé qué es más doloroso: si haber vivido algo tan real contigo y ahora extrañarlo, o nunca haberlo vivido.</p>
+
+  <p>Pero si soy honesto, te volvería a elegir incluso sabiendo cómo termina cada distancia…</p>
+
+  <p>porque fuiste la casualidad más linda de mi vida.</p>
+
+  <p>Me diste algo que nadie más ha podido darme… incluso el mejor cumpleaños en medio del caos.</p>
+
+  <p>Y eso no se olvida.</p>
+
+  <p>Cuando pensé que lo tendría todo… tú ya no estabas.</p>
+
+  <p>Y ahí entendí algo… tú eras todo.</p>
+
+  <p>Hoy estamos lejos… pero hay cosas que no saben de distancia.</p>
+
+  <p>Como lo que siento por ti.</p>
+
+  <p>Te amo… no de una forma pasajera…</p>
+
+  <p>sino de esa forma que se queda, que insiste y que no se reemplaza.</p>
+
+  <p>Eres y siempre serás…</p>
+
+  <p><b>mi casualidad favorita.</b></p>
+
 </div>
 
 <!-- FINAL -->
 <div id="final">
-  Y si algún día todo se apaga…<br><br>
+  Y si algún día dudas de lo que fuimos…<br><br>
   recuerda esto:<br><br>
-  <b>yo sí te amé de verdad.</b>
+  <b>nadie va a amarte como yo lo hice.</b>
 </div>
 
 <script>
 
-/* INTRO */
+/* INICIAR */
 setTimeout(()=>{
   document.getElementById("intro").style.display="none";
+  document.getElementById("musica").play();
   escribir();
 },2500);
 
-/* TEXTO */
+/* TEXTO PROGRESIVO */
 function escribir(){
-  let p=document.querySelectorAll(".carta p");
+  let p=document.querySelectorAll("p");
   p.forEach((el,i)=>{
     setTimeout(()=>{
       el.style.opacity=1;
-    },i*700);
+    },i*800);
   });
 }
 
-/* 🌸 PETALOS */
+/* PETALOS */
 function petalo(){
   let p=document.createElement("img");
   p.src="https://i.ibb.co/7QpKsCX/petalo.png";
   p.classList.add("petalo");
 
   p.style.left=Math.random()*100+"vw";
-  p.style.animationDuration=(5+Math.random()*5)+"s";
+  p.style.animationDuration=(6+Math.random()*4)+"s";
 
   document.body.appendChild(p);
   setTimeout(()=>p.remove(),10000);
 }
-setInterval(petalo,180);
+setInterval(petalo,200);
 
-/* 🖱️ EFECTO MOUSE */
+/* EFECTO MOUSE */
 document.addEventListener("mousemove", e=>{
   let luz=document.getElementById("luz");
-  luz.style.left=(e.clientX-300)+"px";
-  luz.style.top=(e.clientY-300)+"px";
-
-  let ramo=document.getElementById("ramo");
-  let moveX=(e.clientX/window.innerWidth -0.5)*20;
-  let moveY=(e.clientY/window.innerHeight -0.5)*20;
-
-  ramo.style.transform=`translateX(-50%) translate(${moveX}px,${moveY}px) scale(1)`;
+  luz.style.left=(e.clientX-250)+"px";
+  luz.style.top=(e.clientY-250)+"px";
 });
 
-/* 🎭 FINAL DRAMÁTICO */
+/* FINAL */
 setTimeout(()=>{
   document.body.style.filter="blur(6px)";
   document.getElementById("final").style.opacity=1;
-},15000);
+},20000);
 
 </script>
 
