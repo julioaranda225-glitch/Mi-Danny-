@@ -245,6 +245,15 @@
             border: none;
         }
 
+        /* --- REPRODUCTOR DE MÚSICA OCULTO --- */
+        .music-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
+
         /* --- EFECTO DE PÉTALOS INTERACTIVOS (CURSOR) --- */
         .petal {
             position: fixed;
@@ -337,7 +346,7 @@
             <div class="video-wrapper">
                 <iframe 
                     id="video-player"
-                    src="https://www.youtube.com/embed/HqYl-VkL1Mc?rel=0"
+                    src="https://www.youtube.com/embed/HqYl-VkL1Mc?rel=0&enablejsapi=1"
                     title="Mensaje especial para Danny" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowfullscreen>
@@ -347,16 +356,19 @@
 
     </div>
 
-    <audio id="background-music" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
-    </audio>
+    <div class="music-hidden">
+        <iframe 
+            id="youtube-audio"
+            src="https://www.youtube.com/embed/cs0_s6o8uAI?enablejsapi=1&loop=1&playlist=cs0_s6o8uAI" 
+            allow="autoplay">
+        </iframe>
+    </div>
 
     <script>
         document.getElementById('btn-abrir').addEventListener('click', function() {
             const welcomeScreen = document.getElementById('welcome-screen');
             const mainContent = document.getElementById('main-content');
-            const music = document.getElementById('background-music');
-
+            
             welcomeScreen.style.opacity = '0';
             mainContent.style.display = 'block';
             
@@ -365,13 +377,14 @@
                 mainContent.classList.add('visible');
             }, 800);
 
-            if(music) {
-                music.volume = 0.20; // Ajustamos un volumen de fondo ideal
-                music.play().catch(err => console.log("Audio listo tras el clic"));
+            // Activamos la música de YouTube de fondo enviando el comando de play a la API interna
+            const audioIframe = document.getElementById('youtube-audio');
+            if (audioIframe) {
+                audioIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
             }
         });
 
-        // Estela interactiva de girasoles y corazones con el mouse
+        // Estela interactiva del mouse
         document.addEventListener('mousemove', function(e) {
             if (Math.random() > 0.88) { 
                 const petal = document.createElement('span');
