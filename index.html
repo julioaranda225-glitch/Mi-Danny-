@@ -26,12 +26,12 @@
             font-family: 'Montserrat', sans-serif;
             background: var(--bg-gradient);
             min-height: 100vh;
-            overflow: hidden; /* Se habilita al abrir la carta */
+            overflow: hidden;
             color: var(--ink-dark);
             position: relative;
         }
 
-        /* --- 1. PANTALLA INICIAL (ESTILO GITHUB) --- */
+        /* --- 1. PANTALLA INICIAL (ESTILO GITHUB AUTOMÁTICA) --- */
         #intro-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -54,36 +54,34 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             max-width: 500px;
             width: 100%;
+            position: relative;
         }
 
         .github-box i { font-size: 4rem; color: var(--github-dark); margin-bottom: 20px; }
         .github-box h2 { font-size: 1.5rem; margin-bottom: 10px; color: var(--github-dark); }
-        .github-box p { color: #586069; margin-bottom: 25px; font-size: 0.9rem; }
+        .github-box p { color: #586069; margin-bottom: 20px; font-size: 0.9rem; }
         
-        .repo-link {
-            display: block;
-            background-color: var(--github-dark);
-            color: white;
-            text-decoration: none;
-            padding: 12px 20px;
-            border-radius: 6px;
+        /* Animación sutil de carga técnica */
+        .loading-status {
+            font-size: 0.85rem;
+            color: #28a745;
             font-weight: 600;
-            margin-bottom: 20px;
-            transition: 0.3s;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
-        .repo-link:hover { opacity: 0.9; }
-
-        .btn-next {
-            background-color: var(--soft-blue);
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.3s;
+        
+        .spinner {
+            width: 14px;
+            height: 14px;
+            border: 2px solid #28a745;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
         }
-        .btn-next:hover { background-color: #8bb1da; transform: scale(1.05); }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
         /* --- 2. PANTALLA DE BIENVENIDA (GIRASOLES) --- */
         #welcome-screen {
@@ -91,7 +89,7 @@
             top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle, #fff 20%, #f6e58d 100%);
             z-index: 1000;
-            display: none; /* Se activa con JS */
+            display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
@@ -194,9 +192,11 @@
         <div class="github-box">
             <i class="fab fa-github"></i>
             <h2>macedoflp / valentine</h2>
-            <p>Proyecto de código abierto desarrollado para una ocasión especial.</p>
-            <a href="https://github.com/macedoflp/valentine" target="_blank" class="repo-link">Ver Repositorio</a>
-            <button class="btn-next" onclick="showWelcome()">Ejecutar Proyecto</button>
+            <p>Repositorio del proyecto alojado correctamente.</p>
+            <div class="loading-status">
+                <div class="spinner"></div>
+                <span>Iniciando entorno del proyecto...</span>
+            </div>
         </div>
     </div>
 
@@ -214,6 +214,7 @@
     </div>
 
     <div class="ambient-rain" id="rain-layer"></div>
+    
     <div class="main-container" id="main-content">
         <article class="letter-paper">
             <div class="corner-decoration top-left">🌻🩵</div>
@@ -261,17 +262,21 @@
     </div>
 
     <script>
-        function showWelcome() {
-            const intro = document.getElementById('intro-screen');
-            const welcome = document.getElementById('welcome-screen');
-            intro.style.opacity = '0';
+        // Transición AUTOMÁTICA del Paso 1 al Paso 2 después de 3 segundos
+        window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
-                intro.style.display = 'none';
-                welcome.style.display = 'flex';
-                setTimeout(() => { welcome.style.opacity = '1'; }, 50);
-            }, 800);
-        }
+                const intro = document.getElementById('intro-screen');
+                const welcome = document.getElementById('welcome-screen');
+                intro.style.opacity = '0';
+                setTimeout(() => {
+                    intro.style.display = 'none';
+                    welcome.style.display = 'flex';
+                    setTimeout(() => { welcome.style.opacity = '1'; }, 50);
+                }, 800);
+            }, 3000); // 3000 milisegundos = 3 segundos de espera técnica
+        });
 
+        // Paso 2 al Paso 3 (Requiere clic para activar el audio del navegador)
         function openLetter() {
             const welcome = document.getElementById('welcome-screen');
             const main = document.getElementById('main-content');
