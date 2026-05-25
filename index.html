@@ -3,350 +3,332 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Mi Danny, con amor 🌻</title>
+    <title>Para Mi Danny, con amor</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary-yellow: #ffd700;
-            --sunflower-dark: #ffaa00;
-            --sunflower-center: #3a1f05;
-            --gold-glow: #f39c12;
+            --primary-yellow: #FFD700;
             --soft-blue: #A2C2E8;
-            --paper-cream: #fbf6ec;
-            --ink-dark: #2c1d11;
-            --bg-gradient: linear-gradient(135deg, #f5efe3 0%, #dcd3b8 100%);
-            --purple-night: #0d021a;
+            --pure-white: #FFFFFF;
+            --text-dark: #2C3E50;
+            --bg-gradient: linear-gradient(135deg, #fdfbf7 0%, #e1eec3 100%);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        body {
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background-color: var(--purple-night);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
+        }
+
+        body {
             font-family: 'Montserrat', sans-serif;
-            color: #fff;
-            position: relative;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: var(--text-dark);
         }
 
-        /* --- PANTALLA 1: INICIO --- */
-        #start-screen {
-            text-align: center;
-            z-index: 10;
-            transition: opacity 0.5s ease;
-        }
-
-        .gift-btn {
-            background-color: #ffd700;
-            color: #000;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border-radius: 30px;
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
-            transition: transform 0.2s, background-color 0.2s;
-        }
-
-        .gift-btn:hover {
-            transform: scale(1.05);
-            background-color: #fff;
-        }
-
-        /* --- PANTALLA 2: RAMO DE GIRASOLES MEJORADO --- */
-        #flowers-content {
-            display: none;
-            text-align: center;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90%;
-            max-width: 600px;
-        }
-
-        .message {
-            margin-bottom: 50px;
-            font-size: 1.6rem;
-            text-shadow: 0 0 10px #ffd700;
-            line-height: 1.4;
-        }
-
-        /* Estilización Avanzada del Ramo de Girasoles */
-        .ramo {
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            gap: 40px;
-            height: 220px;
-            margin-bottom: 50px;
-        }
-
-        .girasol-wrapper {
-            position: relative;
+        /* --- PANTALLA DE BIENVENIDA (GIRASOLES) --- */
+        #welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #fff 20%, #f6e58d 100%);
+            z-index: 1000;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
-            animation: bloom 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            transition: opacity 0.8s ease-in-out;
+            opacity: 1;
+            visibility: visible;
         }
 
-        /* Tallo y hojas del girasol */
-        .tallo {
-            width: 6px;
-            height: 120px;
-            background: linear-gradient(to top, #1e5322, #2e7d32);
-            border-radius: 4px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .tallo::after {
-            content: '';
-            position: absolute;
-            top: 40px;
-            left: 5px;
-            width: 25px;
-            height: 15px;
-            background-color: #2e7d32;
-            border-radius: 100% 0% 100% 0%;
-            transform: rotate(15deg);
-        }
-
-        .girasol-wrapper:nth-child(even) .tallo::after {
-            left: -24px;
-            border-radius: 0% 100% 0% 100%;
-            transform: rotate(-15deg);
-        }
-
-        /* Cabeza del Girasol */
-        .girasol-head {
-            width: 80px;
-            height: 80px;
-            position: relative;
-            z-index: 2;
-            margin-bottom: -5px;
-        }
-
-        /* Centro oscuro del Girasol */
-        .centro {
-            width: 44px;
-            height: 44px;
-            background-color: var(--sunflower-center);
-            background-image: radial-gradient(#542e0c 20%, transparent 25%), radial-gradient(#261403 20%, transparent 25%);
-            background-size: 6px 6px;
-            background-position: 0 0, 3px 3px;
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 5;
-            box-shadow: inset 0 0 8px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.3);
-        }
-
-        /* Contenedor de pétalos individuales distribuidos matemáticamente */
-        .petalos {
+        .sunflower-garden {
             position: absolute;
             width: 100%;
             height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 3;
+            pointer-events: none;
         }
 
-        .petalo {
+        /* Girasoles estáticos de fondo en la bienvenida */
+        .bg-sunflower {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 14px;
-            height: 36px;
-            background: linear-gradient(to top, var(--sunflower-dark), var(--primary-yellow));
-            border-radius: 50% 50% 10% 10%;
-            transform-origin: bottom center;
-            box-shadow: 0 -2px 5px rgba(255,170,0,0.2);
+            font-size: 5rem;
+            animation: floatSunflower 6s ease-in-out infinite alternate;
+            opacity: 0.8;
         }
 
-        /* Rotación exacta para cada uno de los 12 pétalos */
-        .petalo:nth-child(1)  { transform: translate(-50%, -100%) rotate(0deg); }
-        .petalo:nth-child(2)  { transform: translate(-50%, -100%) rotate(30deg); }
-        .petalo:nth-child(3)  { transform: translate(-50%, -100%) rotate(60deg); }
-        .petalo:nth-child(4)  { transform: translate(-50%, -100%) rotate(90deg); }
-        .petalo:nth-child(5)  { transform: translate(-50%, -100%) rotate(120deg); }
-        .petalo:nth-child(6)  { transform: translate(-50%, -100%) rotate(150deg); }
-        .petalo:nth-child(7)  { transform: translate(-50%, -100%) rotate(180deg); }
-        .petalo:nth-child(8)  { transform: translate(-50%, -100%) rotate(210deg); }
-        .petalo:nth-child(9)  { transform: translate(-50%, -100%) rotate(240deg); }
-        .petalo:nth-child(10) { transform: translate(-50%, -100%) rotate(270deg); }
-        .petalo:nth-child(11) { transform: translate(-50%, -100%) rotate(300deg); }
-        .petalo:nth-child(12) { transform: translate(-50%, -100%) rotate(330deg); }
+        @keyframes floatSunflower {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-20px) rotate(15deg); }
+        }
 
-        .continue-btn {
-            background-color: transparent;
-            color: #ffd700;
-            border: 2px solid #ffd700;
-            padding: 12px 28px;
-            font-size: 1rem;
+        .welcome-box {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 3px solid var(--primary-yellow);
+            z-index: 10;
+            max-width: 90%;
+            animation: pulseBox 2s infinite alternate;
+        }
+
+        @keyframes pulseBox {
+            0% { transform: scale(0.98); }
+            100% { transform: scale(1.02); }
+        }
+
+        .welcome-box h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .welcome-box p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .enter-btn {
+            background: var(--primary-yellow);
+            color: var(--text-dark);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
             font-weight: 600;
-            border-radius: 25px;
+            border-radius: 30px;
             cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
             transition: all 0.3s ease;
+            position: relative;
+            z-index: 20;
         }
 
-        .continue-btn:hover {
-            background-color: #ffd700;
-            color: #000;
-            box-shadow: 0 0 15px #ffd700;
+        .enter-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.6);
+            background: #ecc100;
         }
 
-        /* --- PANTALLA 3: LA CARTA --- */
+        /* --- CONTENEDOR PRINCIPAL DE LA CARTA --- */
         .main-container {
             max-width: 800px;
-            width: 100%;
             margin: 4rem auto;
             padding: 0 20px;
-            display: none;
+            display: none; /* Oculto inicialmente para evitar bugs visuales */
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 1s ease, transform 1s ease;
-            z-index: 5;
-            color: var(--ink-dark);
+            transition: opacity 1s ease-out, transform 1s ease-out;
         }
 
+        .main-container.visible {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* El pergamino/hoja simulada hecha a mano */
         .letter-paper {
-            background: var(--paper-cream);
-            background-image: linear-gradient(rgba(235, 224, 203, 0.3) 1px, transparent 1px);
-            background-size: 100% 32px;
-            padding: 5rem 4.5rem;
-            border-radius: 8px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3), inset 0 0 60px rgba(212, 191, 151, 0.35);
+            background: var(--pure-white);
+            background-image: radial-gradient(#f3eedf 10%, transparent 11%), radial-gradient(#f3eedf 10%, transparent 11%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            padding: 5rem 4rem;
+            border-radius: 4px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08), inset 0 0 40px rgba(243, 238, 223, 0.5);
             position: relative;
+            border-left: 2px solid rgba(162, 194, 232, 0.3);
         }
 
-        .corner-decoration { position: absolute; font-size: 3.5rem; opacity: 0.85; animation: gentleRotate 4s infinite alternate; }
-        .top-left { top: 15px; left: 15px; } .top-right { top: 15px; right: 15px; }
-        @keyframes gentleRotate { 0% { transform: rotate(-5deg); } 100% { transform: rotate(5deg); } }
+        /* Decoración de Girasoles en las esquinas */
+        .corner-decoration {
+            position: absolute;
+            font-size: 3.5rem;
+            opacity: 0.9;
+            user-select: none;
+        }
+        .top-left { top: 15px; left: 15px; transform: rotate(-15deg); }
+        .top-right { top: 15px; right: 15px; transform: rotate(15deg); }
+        .bottom-left { bottom: 15px; left: 15px; transform: rotate(-45deg); }
+        .bottom-right { bottom: 15px; right: 15px; transform: rotate(45deg); }
 
-        .letter-content { font-family: 'Caveat', cursive; font-size: 2.1rem; line-height: 1.5; text-align: justify; }
-        .letter-header-flex { display: flex; justify-content: space-between; border-bottom: 2px dashed rgba(162,194,232,0.5); padding-bottom: 12px; margin-bottom: 2.5rem; }
-        .signature { margin-top: 4rem; text-align: right; font-size: 2.4rem; }
-        .heart-icon { color: var(--soft-blue); animation: heartbeat 1.5s infinite; display: inline-block; }
-        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
-
-        .video-section { margin-top: 3.5rem; background: rgba(255,255,255,0.9); padding: 2.5rem; border-radius: 15px; text-align: center; }
-        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; background: #000; }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-
-        /* EFECTOS AMBIENTALES */
-        .ambient-rain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; display: none; }
-        .falling-element { position: absolute; animation: fallAnimation linear infinite; color: #fff; }
-        @keyframes fallAnimation { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; } 10% { opacity: 0.8; } 100% { transform: translateY(105vh) rotate(360deg); opacity: 0; } }
-        
-        .petal { position: fixed; pointer-events: none; z-index: 9999; animation: fadeOutPetal 1.2s forwards; }
-        @keyframes fadeOutPetal { 0% { opacity: 1; transform: scale(1.2); } 100% { opacity: 0; transform: translate(var(--mx), var(--my)) scale(0.4); } }
-
-        /* ANIMACIONES */
-        @keyframes bloom {
-            from { transform: scale(0) translateY(50px); opacity: 0; }
-            to { transform: scale(1) translateY(0); opacity: 1; }
+        /* Estilos del texto escrito a mano */
+        .letter-content {
+            font-family: 'Caveat', cursive;
+            font-size: 1.85rem;
+            line-height: 1.6;
+            color: #2c3e50;
+            text-align: justify;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .letter-content p {
+            margin-bottom: 2rem;
+            text-indent: 1.5rem;
         }
 
+        .letter-content .headline {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 2.5rem;
+            text-align: left;
+            margin-bottom: 2.5rem;
+            text-indent: 0;
+            color: #1a252f;
+            border-bottom: 1px dashed var(--soft-blue);
+            padding-bottom: 10px;
+        }
+
+        .signature {
+            margin-top: 4rem;
+            text-align: right;
+            font-size: 2.2rem;
+            line-height: 1.3;
+            text-indent: 0 !important;
+        }
+
+        .heart-icon {
+            color: var(--soft-blue);
+            font-size: 1.5rem;
+            display: inline-block;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* --- SECCIÓN DEL VIDEO DE INGENIERO --- */
+        .video-section {
+            margin-top: 3rem;
+            background: var(--pure-white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid rgba(162, 194, 232, 0.4);
+            text-align: center;
+        }
+
+        .video-section h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            color: #7f8c8d;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: #000;
+        }
+
+        .video-wrapper iframe, .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* --- EFECTO DE PÉTALOS INTERACTIVOS (CURSOR) --- */
+        .petal {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            font-size: 1.5rem;
+            user-select: none;
+            animation: fadeOutPetal 1s forwards ease-out;
+        }
+
+        @keyframes fadeOutPetal {
+            0% { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1); }
+            100% { opacity: 0; transform: translate(var(--mx), var(--my)) rotate(var(--rt)) scale(0.5); }
+        }
+
+        /* Adaptación móvil */
         @media (max-width: 768px) {
-            .letter-paper { padding: 3rem 1.5rem; }
+            .letter-paper { padding: 3.5rem 2rem; }
             .letter-content { font-size: 1.6rem; }
-            .letter-header-flex { flex-direction: column; }
-            .ramo { gap: 15px; }
+            .main-container { margin: 1rem auto; }
+            .corner-decoration { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <div id="start-screen">
-        <button class="gift-btn" onclick="mostrarRamo()">¡Sorpresa para ti! 🌻</button>
-    </div>
-
-    <div id="flowers-content">
-        <div class="message">"Tal vez no sean reales, pero estas flores amarillas son para ti."</div>
-        
-        <div class="ramo">
-            <div class="girasol-wrapper" style="animation-delay: 0.1s; transform: rotate(-10deg);">
-                <div class="girasol-head">
-                    <div class="centro"></div>
-                    <div class="petalos">
-                        <div class="petalo"></div><div class="petalo"></div><div class="petalo"></div><div class="petalo"></div>
-                        <div class="petalo"></div><div class="petalo"></div><div class="petalo"></div><div class="petalo"></div>
-                        <div class="petalo"></div><div class="petalo"></div><div class="petalo"></div><div class="petalo"></div>
-                    </div>
-                </div>
-                <div class="tallo" style="height: 110px;"></div>
-            </div>
-
-            <div class="girasol-wrapper" style="animation-delay: 0.4s; z-index: 10;">
-                <div class="girasol-head" style="width: 90px; height: 90px;">
-                    <div class="centro" style="width: 50px; height: 50px;"></div>
-                    <div class="petalos">
-                        <div class="petalo" style="height: 42px;"></div><div class="petalo" style="height: 42px;"></div><div class="petalo" style="height: 42px;"></div><div class="petalo" style="height: 42px;"></div>
-                        <div class="petalo" style="height: 42px;"></div><div class="petalo" style="height: 42px;"></div><div class="petalo" style="height: 42px;"></div><div class="petalo" style="height: 42px;"></div>
-                        <div class="petalo" style="height: 42px;"></div><div class="petalo" style="height: 42px;"></div><div class="petalo" style="height: 42px;"></div><div class="petalo" style="height: 42px;"></div>
-                    </div>
-                </div>
-                <div class="tallo" style="height: 140px;"></div>
-            </div>
-
-            <div class="girasol-wrapper" style="animation-delay: 0.2s; transform: rotate(10deg);">
-                <div class="girasol-head">
-                    <div class="centro"></div>
-                    <div class="petalos">
-                        <div class="petalo"></div><div class="petalo"></div><div class="petalo"></div><div class="petalo"></div>
-                        <div class="petalo"></div><div class="petalo"></div><div class="petalo"></div><div class="petalo"></div>
-                        <div class="petalo"></div><div class="petalo"></div><div class="petalo"></div><div class="petalo"></div>
-                    </div>
-                </div>
-                <div class="tallo" style="height: 105px;"></div>
-            </div>
+    <div id="welcome-screen">
+        <div class="sunflower-garden">
+            <span class="bg-sunflower" style="top: 10%; left: 10%;">🌻</span>
+            <span class="bg-sunflower" style="top: 15%; right: 15%; animation-delay: 1s;">🌻</span>
+            <span class="bg-sunflower" style="bottom: 15%; left: 12%; animation-delay: 0.5s;">🌻</span>
+            <span class="bg-sunflower" style="bottom: 20%; right: 10%; animation-delay: 1.5s;">🌻</span>
+            <span class="bg-sunflower" style="top: 45%; left: 5%; font-size: 3rem; opacity:0.5;">🌻</span>
+            <span class="bg-sunflower" style="top: 50%; right: 5%; font-size: 3rem; opacity:0.5;">🌻</span>
         </div>
-
-        <button class="continue-btn" onclick="openLetter()">Leer carta completa 🩵</button>
+        
+        <div class="welcome-box">
+            <h1>Para mi persona favorita 🩵</h1>
+            <p>Danny, la distancia separa cuerpos, pero no almas. Abre esto cuando estés lista.</p>
+            <button class="enter-btn" id="btn-abrir">Abrir la carta</button>
+        </div>
     </div>
 
-    <div class="ambient-rain" id="rain-layer"></div>
-    
     <div class="main-container" id="main-content">
+        
         <article class="letter-paper">
             <div class="corner-decoration top-left">🌻🩵</div>
             <div class="corner-decoration top-right">🩵🌻</div>
+            <div class="corner-decoration bottom-left">🌻</div>
+            <div class="corner-decoration bottom-right">🩵🌻</div>
 
             <div class="letter-content">
-                <div class="letter-header-flex">
-                    <h2 class="headline">Mi Danny,</h2>
-                    <span class="birthday-text">Feliz vuelta al sol.</span>
-                </div>
+                <h2 class="headline">Mi Danny,</h2>
+                
                 <p>Amor de mi vida y para mi vida…</p>
+
                 <p>A veces me pongo a pensar y no sé qué es más doloroso: si haber vivido algo tan real contigo y ahora extrañarlo, o nunca haberlo vivido. Pero si soy honesto, te volvería a elegir incluso sabiendo cómo termina cada distancia, porque fuiste la casualidad más linda de mi vida.</p>
+
                 <p>Me diste algo que nadie más ha podido darme. Incluso lograste regalarme el mejor cumpleaños en medio del caos, de las complicaciones y de todo lo que no estaba a nuestro favor. Y eso no se olvida.</p>
+
                 <p>Fue ahí cuando entendí algo que no estaba listo para aceptar. Cuando pensé que lo tendría todo, tú ya no estabas. Y en ese momento comprendí que tú eras todo.</p>
+
                 <p>A veces creo que Dios, la vida o la energía sabía que la única forma de separarnos era poniendo un océano entre nosotros, porque de otra forma simplemente no habría sido posible.</p>
+
                 <p>Quiero que sepas algo de verdad. El hombre que hoy ves, el que la gente admira, respeta y reconoce, tiene tu nombre escondido en cada logro. Es gracias a ti. Todo ese crédito es tuyo, porque fuiste una mujer increíble en todos los sentidos, porque tú fuiste parte de esto, porque tú me construiste en formas que nadie más va a entender.</p>
+
                 <p>Y hay algo que quiero que tengas claro. No tengo corazón, porque te lo di. Y si soy honesto, creo que te lo llevaste contigo. Eres la dueña de él y, que yo sepa, aún no me lo has regresado. Y lo peor es que ni siquiera quiero que me lo devuelvas.</p>
+
                 <p>Eres hermosa, encantadora, todo lo que podría describir como perfecto. Pero no solo eso… eres esa mezcla rara de paz, fuego, dulzura y locura que simplemente no se repite. Mi Danny…</p>
+
                 <p>Y aunque no te lo diga todos los días, aunque a veces lo disimule, la verdad es que te amo más que nunca. No de una forma pasajera, sino de esa forma que no se va, que no se olvida. Te amo de esa forma incómoda que se queda, que insiste y que no se reemplaza.</p>
+
                 <p>Hoy estamos lejos, pero hay cosas que no saben de distancia, como lo que siento por ti, como ese “hoy y siempre” que alguna vez dijimos y que yo todavía cumplo en silencio.</p>
+
                 <p>Te amo… mujer mía, esposa mía, madre de mis hijos.</p>
+
                 <p>Y sí, recuerda la promesa. Algún día me vas a hacer papá.</p>
+
                 <p>No sé en qué momento leas esto ni qué estés sintiendo ahora mismo, pero si algo quiero que te quede claro es esto: no fuiste algo bonito que pasó en mi vida… fuiste algo que me cambió para siempre.</p>
+
                 <div class="signature">
                     De tu ingeniero... <span class="heart-icon">🩵</span><br>
                     <strong>el que nunca deja de elegirte.</strong>
@@ -355,76 +337,72 @@
         </article>
 
         <section class="video-section">
-            <h3>Para que me sientas un poquito más cerca de ti</h3>
+            <h3>Un mensaje en movimiento desde Colombia</h3>
             <div class="video-wrapper">
-                <iframe id="video-player" src="https://www.youtube.com/embed/_33z-zE3qGo" allowfullscreen></iframe>
+                <iframe 
+                    id="video-player"
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0" 
+                    title="Mensaje especial para Danny" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
             </div>
         </section>
+
     </div>
 
-    <div style="display: none;">
-        <iframe id="youtube-audio" src="https://www.youtube.com/embed/cs0_s6o8uAI?enablejsapi=1&loop=1&playlist=cs0_s6o8uAI" allow="autoplay"></iframe>
-    </div>
+    <audio id="background-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
 
     <script>
-        function mostrarRamo() {
-            document.getElementById('start-screen').style.display = 'none';
-            const flowersContent = document.getElementById('flowers-content');
-            flowersContent.style.display = 'block';
-            flowersContent.style.animation = 'fadeIn 1s ease forwards';
-        }
-
-        function openLetter() {
-            const flowersContent = document.getElementById('flowers-content');
+        // Manejador del evento clic robusto y directo asignado por ID de JS
+        document.getElementById('btn-abrir').addEventListener('click', function() {
+            const welcomeScreen = document.getElementById('welcome-screen');
             const mainContent = document.getElementById('main-content');
-            const rainLayer = document.getElementById('rain-layer');
+            const music = document.getElementById('background-music');
+
+            // 1. Forzar desvanecimiento visual
+            welcomeScreen.style.opacity = '0';
             
-            document.body.style.overflow = 'auto';
-            document.body.style.display = 'block';
-            document.body.style.background = 'linear-gradient(135deg, #f5efe3 0%, #dcd3b8 100%)';
+            // 2. Ejecutar cambio de estado del DOM inmediatamente
+            mainContent.style.display = 'block';
             
-            flowersContent.style.opacity = '0';
             setTimeout(() => {
-                flowersContent.style.display = 'none';
-                mainContent.style.display = 'block';
-                rainLayer.style.display = 'block';
-                
-                setTimeout(() => { 
-                    mainContent.style.opacity = '1'; 
-                    createAmbientRain(); 
-                }, 50);
-                
-                const audio = document.getElementById('youtube-audio');
-                audio.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-            }, 500);
-        }
+                welcomeScreen.style.display = 'none'; // Quita la pantalla por completo para liberar clics
+                mainContent.classList.add('visible');
+            }, 800);
 
-        function createAmbientRain() {
-            const layer = document.getElementById('rain-layer');
-            const elements = ['🌻', '✨', '🩵', '🌻'];
-            setInterval(() => {
-                const p = document.createElement('span');
-                p.className = 'falling-element';
-                p.innerText = elements[Math.floor(Math.random() * elements.length)];
-                p.style.left = Math.random() * 100 + 'vw';
-                p.style.animationDuration = (Math.random() * 3 + 4) + 's';
-                p.style.fontSize = (Math.random() * 1 + 0.8) + 'rem';
-                layer.appendChild(p);
-                setTimeout(() => p.remove(), 7000);
-            }, 500);
-        }
+            // 3. Intento seguro de reproducir música sin romper el script
+            if(music) {
+                music.volume = 0.3;
+                music.play().catch(err => console.log("Audio en espera de permisos explícitos"));
+            }
+        });
 
-        document.addEventListener('mousemove', (e) => {
-            if (Math.random() > 0.88) {
-                const p = document.createElement('span');
-                p.className = 'petal';
-                p.innerText = ['🌻', '🩵', '✨'][Math.floor(Math.random() * 3)];
-                p.style.left = e.clientX + 'px';
-                p.style.top = e.clientY + 'px';
-                p.style.setProperty('--mx', `${(Math.random()-0.5)*150}px`);
-                p.style.setProperty('--my', `${(Math.random()*150)+50}px`);
-                document.body.appendChild(p);
-                setTimeout(() => p.remove(), 1200);
+        // Estela interactiva del mouse (Girasoles y corazones)
+        document.addEventListener('mousemove', function(e) {
+            if (Math.random() > 0.88) { 
+                const petal = document.createElement('span');
+                petal.className = 'petal';
+                
+                const pool = ['🌻', '🩵', '✨', '🌻'];
+                petal.innerText = pool[Math.floor(Math.random() * pool.length)];
+
+                petal.style.left = e.clientX + 'px';
+                petal.style.top = e.clientY + 'px';
+
+                const movementX = (Math.random() - 0.5) * 150;
+                const movementY = (Math.random() * 150) + 50; 
+                const rotation = (Math.random() - 0.5) * 360;
+
+                petal.style.setProperty('--mx', `${movementX}px`);
+                petal.style.setProperty('--my', `${movementY}px`);
+                petal.style.setProperty('--rt', `${rotation}deg`);
+
+                document.body.appendChild(petal);
+
+                setTimeout(() => { petal.remove(); }, 1000);
             }
         });
     </script>
