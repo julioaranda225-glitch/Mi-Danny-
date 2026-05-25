@@ -3,194 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Mi Danny, con amor</title>
+    <title>Para Mi Danny, con amor 🌻</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
-            --primary-yellow: #FFD700;
+            --primary-yellow: #ffd700;
             --gold-glow: #f39c12;
             --soft-blue: #A2C2E8;
             --paper-cream: #fbf6ec;
             --ink-dark: #2c1d11;
             --bg-gradient: linear-gradient(135deg, #f5efe3 0%, #dcd3b8 100%);
-            --github-dark: #24292e;
-            
-            /* Variables de color para las flores animadas */
-            --bg-flowers: #0b1522;
-            --color-glass: linear-gradient(to left, #142544, #1a2f55);
-            --color-water: linear-gradient(to left, #142544, #1b3056);
+            --purple-night: #0d021a;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: 'Montserrat', sans-serif;
-            background: var(--bg-gradient);
+            margin: 0;
+            padding: 0;
+            background-color: var(--purple-night);
+            display: flex;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
-            overflow: hidden;
-            color: var(--ink-dark);
+            overflow: hidden; /* Se habilita el scroll dinámicamente al abrir la carta */
+            font-family: 'Montserrat', sans-serif;
+            color: #fff;
             position: relative;
         }
 
-        /* --- 1. PANTALLA INICIAL (ESTILO GITHUB AUTOMÁTICA) --- */
-        #intro-screen {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: white;
-            z-index: 2000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: all 0.8s ease-in-out;
+        /* --- PANTALLA 1: INICIO ORIGINAL --- */
+        #start-screen {
             text-align: center;
-            padding: 20px;
+            z-index: 10;
+            transition: opacity 0.5s ease;
         }
 
-        .github-box {
-            background: #f6f8fa;
-            padding: 40px;
-            border-radius: 15px;
-            border: 1px solid #d1d5da;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            max-width: 500px;
-            width: 100%;
+        .gift-btn {
+            background-color: #ffd700;
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+            transition: transform 0.2s, background-color 0.2s;
         }
 
-        .github-box i { font-size: 4rem; color: var(--github-dark); margin-bottom: 20px; }
-        .github-box h2 { font-size: 1.5rem; margin-bottom: 10px; color: var(--github-dark); }
-        .github-box p { color: #586069; margin-bottom: 20px; font-size: 0.9rem; }
-        
-        .loading-status {
-            font-size: 0.85rem;
-            color: #28a745;
-            font-weight: 600;
-            margin-top: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .spinner {
-            width: 14px; height: 14px;
-            border: 2px solid #28a745;
-            border-top-color: transparent;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* --- 2. PANTALLA DE BIENVENIDA (INTEGRACIÓN FLOWER CODE) --- */
-        #welcome-screen {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--bg-flowers);
-            z-index: 1000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.8s ease-in-out;
-            opacity: 0;
-        }
-
-        /* Contenedor del Mensaje flotante e interactivo encima de las flores */
-        .flower-interface {
-            position: absolute;
-            top: 12%;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 1100;
-            text-align: center;
-            padding: 0 20px;
-            pointer-events: none; /* Permite clics debajo si es necesario */
-        }
-
-        .flower-interface h1 {
-            font-family: 'Playfair Display', serif;
-            color: #fff;
-            font-size: 2.2rem;
-            text-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
-            margin-bottom: 5px;
-        }
-
-        .flower-interface .message-sub {
-            color: #FFD700;
-            font-family: 'Caveat', cursive;
-            font-size: 2rem;
-            margin-bottom: 25px;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
-        }
-
-        .enter-btn {
-            background: linear-gradient(135deg, var(--primary-yellow) 0%, #f39c12 100%);
-            color: #fff; border: none; padding: 14px 40px;
-            font-size: 1.15rem; font-weight: 600; border-radius: 30px;
-            cursor: pointer; box-shadow: 0 5px 25px rgba(243, 156, 18, 0.4);
-            pointer-events: auto; /* Habilita el clic en el botón */
-            transition: all 0.3s ease;
-        }
-        .enter-btn:hover {
+        .gift-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 8px 30px rgba(243, 156, 18, 0.6);
+            background-color: #fff;
         }
 
-        /* --- ESTILOS COMPLETO EXTRACTO DEL PEN: FLOWER ANIMATION --- */
-        .flowers { position: relative; width: 100%; height: 100%; display: flex; align-items: flex-end; justify-content: center; min-height: 100vh; padding-bottom: 20vh; overflow: hidden; }
-        .flower { position: relative; }
-        .flower::after { content: ''; position: absolute; width: 2vw; height: 2vw; background-color: #fff; border-radius: 50%; top: -2vw; left: 50%; transform: translateX(-50%); filter: blur(1.5vw); }
-        
-        .flower--1 { animation: grow-flower-1 4s ease-in-out forwards; }
-        .flower--1 .flower__line { height: 65vh; animation-delay: 0.3s; }
-        .flower--2 { transform: rotate(10deg); transform-origin: bottom center; animation: grow-flower-2 4s ease-in-out forwards; }
-        .flower--2 .flower__line { height: 55vh; animation-delay: 0.6s; }
-        .flower--3 { transform: rotate(-10deg); transform-origin: bottom center; animation: grow-flower-3 4s ease-in-out forwards; }
-        .flower--3 .flower__line { height: 50vh; animation-delay: 0.9s; }
+        /* --- PANTALLA 2: CONTENIDO DE FLORES Y MENSAJE --- */
+        #flowers-content {
+            display: none;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 600px;
+            animation: fadeIn 1.5s ease;
+        }
 
-        .flower__line { width: 0.4vw; background-image: linear-gradient(to top, rgba(0,0,0,0), #122c15, #367c3f); border-radius: 2vw; height: 0; animation: grow-element 4s ease-in-out forwards; }
-        .flower__leafs { position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%) scale(0); animation: bloom-flower 2s 2.5s ease-in-out forwards; }
-        .flower__white-circle { width: 6vw; height: 6vw; background-color: #fff; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-        
-        /* Pétalos Amarillos estilo Girasol del original */
-        .flower__leaf { position: absolute; width: 6vw; height: 14vw; background-image: linear-gradient(to top, #ffa200, #ffca00, rgba(255,255,255,0.4)); border-radius: 50% 50% 0 0; transform-origin: bottom center; }
-        .flower__leaf--1 { transform: translate(-50%, -100%) rotate(0deg); }
-        .flower__leaf--2 { transform: translate(-50%, -100%) rotate(90deg); }
-        .flower__leaf--3 { transform: translate(-50%, -100%) rotate(180deg); }
-        .flower__leaf--4 { transform: translate(-50%, -100%) rotate(270deg); }
+        .message {
+            margin-bottom: 30px;
+            font-size: 1.6rem;
+            text-shadow: 0 0 10px #ffd700;
+            line-height: 1.4;
+        }
 
-        /* Luces místicas del Pen */
-        .flower__light { position: absolute; bottom: 0; width: 0.5vw; height: 0.5vw; background-color: #fffb00; border-radius: 50%; filter: blur(0.2vw); animation: light-ans 4s linear infinite; }
-        .flower__light--1 { left: 20%; animation-delay: 1s; } .flower__light--2 { left: 40%; animation-delay: 1.5s; }
-        .flower__light--3 { left: 60%; animation-delay: 2s; } .flower__light--4 { left: 80%; animation-delay: 2.5s; }
+        /* Estilización del ramo */
+        .ramo {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
 
-        /* Hojas de los tallos */
-        .flower__line__leaf { position: absolute; width: 4vw; height: 8vw; background-image: linear-gradient(to top, rgba(16,61,22,0.4), #255829, #4b9351); border-radius: 50% 50% 0 50%; transform-origin: bottom right; }
-        .flower__line__leaf--1 { top: 30%; left: -3.8vw; transform: rotate(-40deg); }
-        .flower__line__leaf--2 { top: 50%; right: -3.8vw; transform: rotate(40deg) scaleX(-1); }
+        .flor {
+            width: 55px;
+            height: 55px;
+            background-color: #ffd700;
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 0 20px #ffd700;
+        }
 
-        /* Animaciones base de crecimiento de Nilver-TI */
-        @keyframes grow-element { to { height: 100%; } }
-        @keyframes bloom-flower { to { transform: translate(-50%, -50%) scale(1); } }
-        @keyframes light-ans { 0% { transform: translateY(0); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-70vh); opacity: 0; } }
-        @keyframes grow-flower-1 { 0% { transform: translateY(50px); } 100% { transform: translateY(0); } }
-        @keyframes grow-flower-2 { 0% { transform: translateY(50px) rotate(0deg); } 100% { transform: translateY(0) rotate(10deg); } }
-        @keyframes grow-flower-3 { 0% { transform: translateY(50px) rotate(0deg); } 100% { transform: translateY(0) rotate(-10deg); } }
+        .flor::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            width: 33px;
+            height: 33px;
+            background-color: #ffcc00;
+            border-radius: 50%;
+        }
 
-        /* --- 3. CONTENEDOR DE LA CARTA --- */
+        .flor::after {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: -10px;
+            width: 22px;
+            height: 42px;
+            background-color: #2e7d32;
+            border-radius: 50%;
+            z-index: -1;
+            transform: rotate(-30deg);
+        }
+
+        .continue-btn {
+            background-color: transparent;
+            color: #ffd700;
+            border: 2px solid #ffd700;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .continue-btn:hover {
+            background-color: #ffd700;
+            color: #000;
+            box-shadow: 0 0 15px #ffd700;
+        }
+
+        /* --- PANTALLA 3: CONTENEDOR DE LA CARTA --- */
         .main-container {
             max-width: 800px;
+            width: 100%;
             margin: 4rem auto;
             padding: 0 20px;
             display: none;
             opacity: 0;
             transform: translateY(30px);
-            transition: 1s;
+            transition: opacity 1s ease, transform 1s ease;
+            z-index: 5;
+            color: var(--ink-dark);
         }
 
         .letter-paper {
@@ -199,7 +160,7 @@
             background-size: 100% 32px;
             padding: 5rem 4.5rem;
             border-radius: 8px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.12), inset 0 0 60px rgba(212, 191, 151, 0.35);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3), inset 0 0 60px rgba(212, 191, 151, 0.35);
             position: relative;
         }
 
@@ -213,94 +174,45 @@
         .heart-icon { color: var(--soft-blue); animation: heartbeat 1.5s infinite; display: inline-block; }
         @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
 
-        /* VIDEO Y FOOTER */
+        /* VIDEO Y SECCIONES INTERNAS */
         .video-section { margin-top: 3.5rem; background: rgba(255,255,255,0.9); padding: 2.5rem; border-radius: 15px; text-align: center; }
         .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; background: #000; }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-        .project-footer { margin-top: 3rem; text-align: center; font-size: 0.8rem; color: #7f8c8d; padding-bottom: 40px; }
 
-        /* AMBIENTE */
+        /* EFECTOS AMBIENTALES DE LLUVIA Y PÉTALOS */
         .ambient-rain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; display: none; }
-        .falling-element { position: absolute; animation: fallAnimation linear infinite; }
+        .falling-element { position: absolute; animation: fallAnimation linear infinite; color: #fff; }
         @keyframes fallAnimation { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; } 10% { opacity: 0.8; } 100% { transform: translateY(105vh) rotate(360deg); opacity: 0; } }
+        
         .petal { position: fixed; pointer-events: none; z-index: 9999; animation: fadeOutPetal 1.2s forwards; }
         @keyframes fadeOutPetal { 0% { opacity: 1; transform: scale(1.2); } 100% { opacity: 0; transform: translate(var(--mx), var(--my)) scale(0.4); } }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
         @media (max-width: 768px) {
             .letter-paper { padding: 3rem 1.5rem; }
             .letter-content { font-size: 1.6rem; }
             .letter-header-flex { flex-direction: column; }
-            .flower__leaf { width: 10vw; height: 22vw; }
-            .flower__line__leaf { width: 8vw; height: 14vw; }
         }
     </style>
 </head>
 <body>
 
-    <div id="intro-screen">
-        <div class="github-box">
-            <i class="fab fa-github"></i>
-            <h2>macedoflp / valentine</h2>
-            <p>Repositorio del proyecto alojado correctamente.</p>
-            <div class="loading-status">
-                <div class="spinner"></div>
-                <span>Iniciando entorno del proyecto...</span>
-            </div>
-        </div>
+    <div id="start-screen">
+        <button class="gift-btn" onclick="mostrarRamo()">¡Sorpresa para ti! 🌻</button>
     </div>
 
-    <div id="welcome-screen">
-        <div class="flower-interface">
-            <h1>Para mi persona favorita 🩵</h1>
-            <div class="message-sub">Estas flores amarillas son para ti</div>
-            <button class="enter-btn" onclick="openLetter()">Abrir la carta</button>
+    <div id="flowers-content">
+        <div class="message">"Tal vez no sean reales, pero estas flores amarillas son para ti."</div>
+        <div class="ramo">
+            <div class="flor"></div>
+            <div class="flor" style="top: -20px;"></div>
+            <div class="flor"></div>
         </div>
-
-        <div class="flowers">
-            <div class="flower flower--1">
-                <div class="flower__leafs flower__leafs--1">
-                    <div class="flower__leaf flower__leaf--1"></div>
-                    <div class="flower__leaf flower__leaf--2"></div>
-                    <div class="flower__leaf flower__leaf--3"></div>
-                    <div class="flower__leaf flower__leaf--4"></div>
-                    <div class="flower__white-circle"></div>
-                    <div class="flower__light flower__light--1"></div>
-                    <div class="flower__light flower__light--2"></div>
-                </div>
-                <div class="flower__line">
-                    <div class="flower__line__leaf flower__line__leaf--1"></div>
-                    <div class="flower__line__leaf flower__line__leaf--2"></div>
-                </div>
-            </div>
-
-            <div class="flower flower--2">
-                <div class="flower__leafs flower__leafs--2">
-                    <div class="flower__leaf flower__leaf--1"></div>
-                    <div class="flower__leaf flower__leaf--2"></div>
-                    <div class="flower__leaf flower__leaf--3"></div>
-                    <div class="flower__leaf flower__leaf--4"></div>
-                    <div class="flower__white-circle"></div>
-                    <div class="flower__light flower__light--3"></div>
-                </div>
-                <div class="flower__line">
-                    <div class="flower__line__leaf flower__line__leaf--1"></div>
-                </div>
-            </div>
-
-            <div class="flower flower--3">
-                <div class="flower__leafs flower__leafs--3">
-                    <div class="flower__leaf flower__leaf--1"></div>
-                    <div class="flower__leaf flower__leaf--2"></div>
-                    <div class="flower__leaf flower__leaf--3"></div>
-                    <div class="flower__leaf flower__leaf--4"></div>
-                    <div class="flower__white-circle"></div>
-                    <div class="flower__light flower__light--4"></div>
-                </div>
-                <div class="flower__line">
-                    <div class="flower__line__leaf flower__line__leaf--2"></div>
-                </div>
-            </div>
-        </div>
+        <button class="continue-btn" onclick="openLetter()">Leer carta completa 🩵</button>
     </div>
 
     <div class="ambient-rain" id="rain-layer"></div>
@@ -341,48 +253,49 @@
                 <iframe id="video-player" src="https://www.youtube.com/embed/_33z-zE3qGo" allowfullscreen></iframe>
             </div>
         </section>
-
-        <footer class="project-footer">
-            <p>Source code: <a href="https://github.com/macedoflp/valentine" target="_blank" style="color:#7f8c8d;">macedoflp/valentine</a></p>
-        </footer>
     </div>
 
-    <div class="music-hidden">
+    <div style="display: none;">
         <iframe id="youtube-audio" src="https://www.youtube.com/embed/cs0_s6o8uAI?enablejsapi=1&loop=1&playlist=cs0_s6o8uAI" allow="autoplay"></iframe>
     </div>
 
     <script>
-        // Transición AUTOMÁTICA del Paso 1 al Paso 2 después de 3 segundos
-        window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                const intro = document.getElementById('intro-screen');
-                const welcome = document.getElementById('welcome-screen');
-                intro.style.opacity = '0';
-                setTimeout(() => {
-                    intro.style.display = 'none';
-                    welcome.style.display = 'flex';
-                    setTimeout(() => { welcome.style.opacity = '1'; }, 50);
-                }, 800);
-            }, 3000); 
-        });
-
-        // Paso 2 al Paso 3 
-        function openLetter() {
-            const welcome = document.getElementById('welcome-screen');
-            const main = document.getElementById('main-content');
-            const rain = document.getElementById('rain-layer');
-            document.body.style.overflow = 'auto';
-            welcome.style.opacity = '0';
-            setTimeout(() => {
-                welcome.style.display = 'none';
-                main.style.display = 'block';
-                rain.style.display = 'block';
-                setTimeout(() => { main.style.opacity = '1'; createAmbientRain(); }, 50);
-                const audio = document.getElementById('youtube-audio');
-                audio.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-            }, 800);
+        // Función original modificada para hacer la transición interna
+        function mostrarRamo() {
+            document.getElementById('start-screen').style.display = 'none';
+            const flowersContent = document.getElementById('flowers-content');
+            flowersContent.style.display = 'block';
         }
 
+        // Transición de las flores amarillas a la carta final
+        function openLetter() {
+            const flowersContent = document.getElementById('flowers-content');
+            const mainContent = document.getElementById('main-content');
+            const rainLayer = document.getElementById('rain-layer');
+            
+            // Configura el body para permitir la lectura y el fondo adecuado
+            document.body.style.overflow = 'auto';
+            document.body.style.display = 'block';
+            document.body.style.background = 'linear-gradient(135deg, #f5efe3 0%, #dcd3b8 100%)';
+            
+            flowersContent.style.opacity = '0';
+            setTimeout(() => {
+                flowersContent.style.display = 'none';
+                mainContent.style.display = 'block';
+                rainLayer.style.display = 'block';
+                
+                setTimeout(() => { 
+                    mainContent.style.opacity = '1'; 
+                    createAmbientRain(); 
+                }, 50);
+                
+                // Dispara el audio en segundo plano al interactuar con el botón
+                const audio = document.getElementById('youtube-audio');
+                audio.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            }, 500);
+        }
+
+        // Lluvia ambiental sutil
         function createAmbientRain() {
             const layer = document.getElementById('rain-layer');
             const elements = ['🌻', '✨', '🩵', '🌻'];
@@ -392,12 +305,13 @@
                 p.innerText = elements[Math.floor(Math.random() * elements.length)];
                 p.style.left = Math.random() * 100 + 'vw';
                 p.style.animationDuration = (Math.random() * 3 + 4) + 's';
-                p.style.fontSize = (Math.random() * 1 + 1) + 'rem';
+                p.style.fontSize = (Math.random() * 1 + 0.8) + 'rem';
                 layer.appendChild(p);
                 setTimeout(() => p.remove(), 7000);
-            }, 400);
+            }, 500);
         }
 
+        // Estela mágica del cursor
         document.addEventListener('mousemove', (e) => {
             if (Math.random() > 0.88) {
                 const p = document.createElement('span');
