@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
@@ -14,80 +15,93 @@
             --gold-glow: #f39c12;
             --soft-blue: #A2C2E8;
             --paper-cream: #fbf6ec;
-            --ink-dark: #2c1d11; /* Color tinta estilográfica café oscuro */
+            --ink-dark: #2c1d11;
             --bg-gradient: linear-gradient(135deg, #f5efe3 0%, #dcd3b8 100%);
+            --github-dark: #24292e;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Montserrat', sans-serif;
             background: var(--bg-gradient);
             min-height: 100vh;
-            overflow-x: hidden;
+            overflow: hidden; /* Se habilita al abrir la carta */
             color: var(--ink-dark);
             position: relative;
         }
 
-        /* --- EFECTO LLUVIA CONTINUA DE FONDO --- */
-        .ambient-rain {
+        /* --- 1. PANTALLA INICIAL (ESTILO GITHUB) --- */
+        #intro-screen {
             position: fixed;
-            top: -20px;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            display: none;
-        }
-
-        .falling-element {
-            position: absolute;
-            top: -30px;
-            font-size: 1.5rem;
-            user-select: none;
-            animation: fallAnimation linear infinite;
-        }
-
-        @keyframes fallAnimation {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.4; }
-            100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
-        }
-
-        /* --- PANTALLA DE BIENVENIDA (GIRASOLES) --- */
-        #welcome-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, #fff 20%, #f6e58d 100%);
-            z-index: 1000;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: white;
+            z-index: 2000;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.8s ease-in-out;
-            opacity: 1;
-            visibility: visible;
+            transition: all 0.8s ease-in-out;
+            text-align: center;
+            padding: 20px;
         }
 
-        .sunflower-garden {
-            position: absolute;
+        .github-box {
+            background: #f6f8fa;
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid #d1d5da;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 500px;
             width: 100%;
-            height: 100%;
-            pointer-events: none;
         }
 
+        .github-box i { font-size: 4rem; color: var(--github-dark); margin-bottom: 20px; }
+        .github-box h2 { font-size: 1.5rem; margin-bottom: 10px; color: var(--github-dark); }
+        .github-box p { color: #586069; margin-bottom: 25px; font-size: 0.9rem; }
+        
+        .repo-link {
+            display: block;
+            background-color: var(--github-dark);
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+        .repo-link:hover { opacity: 0.9; }
+
+        .btn-next {
+            background-color: var(--soft-blue);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn-next:hover { background-color: #8bb1da; transform: scale(1.05); }
+
+        /* --- 2. PANTALLA DE BIENVENIDA (GIRASOLES) --- */
+        #welcome-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, #fff 20%, #f6e58d 100%);
+            z-index: 1000;
+            display: none; /* Se activa con JS */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease-in-out;
+            opacity: 0;
+        }
+
+        .sunflower-garden { position: absolute; width: 100%; height: 100%; pointer-events: none; }
         .bg-sunflower {
-            position: absolute;
-            font-size: 5rem;
+            position: absolute; font-size: 5rem;
             animation: floatSunflower 6s ease-in-out infinite alternate;
             opacity: 0.8;
         }
@@ -110,46 +124,20 @@
         }
 
         @keyframes pulseBox {
-            0% { transform: scale(0.97); box-shadow: 0 10px 25px rgba(243, 156, 18, 0.2); }
-            100% { transform: scale(1.02); box-shadow: 0 20px 45px rgba(243, 156, 18, 0.4); }
+            0% { transform: scale(0.97); }
+            100% { transform: scale(1.02); }
         }
 
-        .welcome-box h1 {
-            font-family: 'Playfair Display', serif;
-            color: #1a252f;
-            margin-bottom: 1rem;
-            font-size: 2.5rem;
-        }
-
-        .welcome-box p {
-            font-size: 1.1rem;
-            color: #555;
-            margin-bottom: 1rem;
-        }
-
+        .welcome-box h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 1rem; }
         .enter-btn {
             background: linear-gradient(135deg, var(--primary-yellow) 0%, #f39c12 100%);
-            color: #fff;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-            border: none;
-            padding: 16px 45px;
-            font-size: 1.25rem;
-            font-weight: 600;
-            border-radius: 30px;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(243, 156, 18, 0.5);
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 20;
+            color: #fff; border: none; padding: 16px 45px;
+            font-size: 1.25rem; font-weight: 600; border-radius: 30px;
+            cursor: pointer; box-shadow: 0 5px 20px rgba(243, 156, 18, 0.5);
             margin-top: 1rem;
         }
 
-        .enter-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(243, 156, 18, 0.7);
-        }
-
-        /* --- CONTENEDOR PRINCIPAL DE LA CARTA --- */
+        /* --- 3. CONTENEDOR DE LA CARTA --- */
         .main-container {
             max-width: 800px;
             margin: 4rem auto;
@@ -157,271 +145,98 @@
             display: none;
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 1s ease-out, transform 1s ease-out;
-            position: relative;
-            z-index: 5;
+            transition: 1s;
         }
 
-        .main-container.visible {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Estilo Pergamino Elegante */
         .letter-paper {
             background: var(--paper-cream);
             background-image: linear-gradient(rgba(235, 224, 203, 0.3) 1px, transparent 1px);
             background-size: 100% 32px;
             padding: 5rem 4.5rem;
             border-radius: 8px;
-            box-shadow: 
-                0 20px 50px rgba(0,0,0,0.12), 
-                inset 0 0 60px rgba(212, 191, 151, 0.35),
-                0 0 0 1px rgba(184, 156, 109, 0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.12), inset 0 0 60px rgba(212, 191, 151, 0.35);
             position: relative;
-            border-left: 3px double rgba(184, 156, 109, 0.4);
         }
 
-        .corner-decoration {
-            position: absolute;
-            font-size: 3.5rem;
-            opacity: 0.85;
-            user-select: none;
-            animation: gentleRotate 4s infinite alternate ease-in-out;
-        }
-        .top-left { top: 15px; left: 15px; transform-origin: top left; }
-        .top-right { top: 15px; right: 15px; transform-origin: top right; }
-        .bottom-left { bottom: 15px; left: 15px; transform-origin: bottom left; }
-        .bottom-right { bottom: 15px; right: 15px; transform-origin: bottom right; }
+        .corner-decoration { position: absolute; font-size: 3.5rem; opacity: 0.85; animation: gentleRotate 4s infinite alternate; }
+        .top-left { top: 15px; left: 15px; } .top-right { top: 15px; right: 15px; }
+        @keyframes gentleRotate { 0% { transform: rotate(-5deg); } 100% { transform: rotate(5deg); } }
 
-        @keyframes gentleRotate {
-            0% { transform: rotate(-5deg) scale(0.95); }
-            100% { transform: rotate(5deg) scale(1.05); }
-        }
+        .letter-content { font-family: 'Caveat', cursive; font-size: 2.1rem; line-height: 1.5; text-align: justify; }
+        .letter-header-flex { display: flex; justify-content: space-between; border-bottom: 2px dashed rgba(162,194,232,0.5); padding-bottom: 12px; margin-bottom: 2.5rem; }
+        .signature { margin-top: 4rem; text-align: right; font-size: 2.4rem; }
+        .heart-icon { color: var(--soft-blue); animation: heartbeat 1.5s infinite; display: inline-block; }
+        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
 
-        .letter-content {
-            font-family: 'Caveat', cursive;
-            font-size: 2.1rem; /* Aumentado para mejor lectura de la caligrafía */
-            font-weight: 500;
-            line-height: 1.5;
-            color: var(--ink-dark);
-            text-align: justify;
-        }
+        /* VIDEO Y FOOTER */
+        .video-section { margin-top: 3.5rem; background: rgba(255,255,255,0.9); padding: 2.5rem; border-radius: 15px; text-align: center; }
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; background: #000; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        .project-footer { margin-top: 3rem; text-align: center; font-size: 0.8rem; color: #7f8c8d; padding-bottom: 40px; }
 
-        .letter-content p {
-            margin-bottom: 2rem;
-            text-indent: 2rem;
-        }
+        /* AMBIENTE */
+        .ambient-rain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; display: none; }
+        .falling-element { position: absolute; animation: fallAnimation linear infinite; }
+        @keyframes fallAnimation { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; } 10% { opacity: 0.8; } 100% { transform: translateY(105vh) rotate(360deg); opacity: 0; } }
+        .petal { position: fixed; pointer-events: none; z-index: 9999; animation: fadeOutPetal 1.2s forwards; }
+        @keyframes fadeOutPetal { 0% { opacity: 1; transform: scale(1.2); } 100% { opacity: 0; transform: translate(var(--mx), var(--my)) scale(0.4); } }
 
-        .letter-header-flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 2.5rem;
-            border-bottom: 2px dashed rgba(162, 194, 232, 0.5);
-            padding-bottom: 12px;
-        }
-
-        .letter-content .headline {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 2.8rem;
-            text-align: left;
-            text-indent: 0;
-            color: #111;
-        }
-
-        .birthday-text {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.1rem;
-            color: #7f8c8d;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .signature {
-            margin-top: 4.5rem;
-            text-align: right;
-            font-size: 2.4rem;
-            line-height: 1.3;
-            text-indent: 0 !important;
-        }
-
-        .heart-icon {
-            color: var(--soft-blue);
-            font-size: 1.7rem;
-            display: inline-block;
-            animation: heartbeat 1.5s infinite;
-        }
-
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.25); }
-            100% { transform: scale(1); }
-        }
-
-        /* --- SECCIÓN DEL VIDEO --- */
-        .video-section {
-            margin-top: 3.5rem;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
-            border: 1px solid rgba(184, 156, 109, 0.2);
-            text-align: center;
-        }
-
-        .video-section h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 400;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-            color: #616e70;
-        }
-
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            background: #000;
-        }
-
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* --- PIE DE PÁGINA (REPOSITORIO) --- */
-        .project-footer {
-            margin-top: 3rem;
-            text-align: center;
-            font-size: 0.85rem;
-            color: #7f8c8d;
-        }
-
-        .project-footer a {
-            color: #555;
-            text-decoration: none;
-            font-weight: 600;
-            border-bottom: 1px dashed #7f8c8d;
-            transition: color 0.3s ease;
-        }
-
-        .project-footer a:hover {
-            color: var(--gold-glow);
-            border-bottom-style: solid;
-        }
-
-        /* --- REPRODUCTOR DE MÚSICA OCULTO --- */
-        .music-hidden {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* --- EFECTO DE PÉTALOS INTERACTIVOS (CURSOR) --- */
-        .petal {
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            font-size: 1.6rem;
-            user-select: none;
-            animation: fadeOutPetal 1.2s forwards ease-out;
-        }
-
-        @keyframes fadeOutPetal {
-            0% { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1.2); }
-            100% { opacity: 0; transform: translate(var(--mx), var(--my)) rotate(var(--rt)) scale(0.4); }
-        }
-
-        /* Adaptación móvil */
         @media (max-width: 768px) {
-            .letter-paper { padding: 4rem 2rem; }
-            .letter-content { font-size: 1.75rem; }
-            .main-container { margin: 1.5rem auto; }
-            .corner-decoration { font-size: 2.3rem; }
-            .letter-header-flex { flex-direction: column; gap: 8px; }
-            .welcome-box { padding: 2rem 1.5rem; }
-            .welcome-box h1 { font-size: 1.9rem; }
+            .letter-paper { padding: 3rem 1.5rem; }
+            .letter-content { font-size: 1.6rem; }
+            .letter-header-flex { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
-    <div class="ambient-rain" id="rain-layer"></div>
+    <div id="intro-screen">
+        <div class="github-box">
+            <i class="fab fa-github"></i>
+            <h2>macedoflp / valentine</h2>
+            <p>Proyecto de código abierto desarrollado para una ocasión especial.</p>
+            <a href="https://github.com/macedoflp/valentine" target="_blank" class="repo-link">Ver Repositorio</a>
+            <button class="btn-next" onclick="showWelcome()">Ejecutar Proyecto</button>
+        </div>
+    </div>
 
     <div id="welcome-screen">
         <div class="sunflower-garden">
             <span class="bg-sunflower" style="top: 10%; left: 10%;">🌻</span>
-            <span class="bg-sunflower" style="top: 15%; right: 15%; animation-delay: 1s;">🌻</span>
-            <span class="bg-sunflower" style="bottom: 15%; left: 12%; animation-delay: 0.5s;">🌻</span>
-            <span class="bg-sunflower" style="bottom: 20%; right: 10%; animation-delay: 1.5s;">🌻</span>
-            <span class="bg-sunflower" style="top: 45%; left: 5%; font-size: 3rem; opacity:0.5;">🌻</span>
-            <span class="bg-sunflower" style="top: 50%; right: 5%; font-size: 3rem; opacity:0.5;">🌻</span>
+            <span class="bg-sunflower" style="top: 15%; right: 15%;">🌻</span>
+            <span class="bg-sunflower" style="bottom: 20%; left: 5%;">🌻</span>
         </div>
-        
         <div class="welcome-box">
             <h1>Para mi persona favorita 🩵</h1>
-            <p>Mi Danny, la distancia separa cuerpos, pero no almas.</p>
-            <p>Hoy el sol brilla más porque es tu día.</p>
-            <p>Tengo algo que solo mis manos y mi alma podrían decirte.</p>
-            <button class="enter-btn" id="btn-abrir">Abrir la carta</button>
+            <p>Danny, hoy el sol brilla más porque es tu día.</p>
+            <button class="enter-btn" onclick="openLetter()">Abrir la carta</button>
         </div>
     </div>
 
+    <div class="ambient-rain" id="rain-layer"></div>
     <div class="main-container" id="main-content">
-        
         <article class="letter-paper">
             <div class="corner-decoration top-left">🌻🩵</div>
             <div class="corner-decoration top-right">🩵🌻</div>
-            <div class="corner-decoration bottom-left">🌻</div>
-            <div class="corner-decoration bottom-right">🩵🌻</div>
 
             <div class="letter-content">
                 <div class="letter-header-flex">
                     <h2 class="headline">Mi Danny,</h2>
                     <span class="birthday-text">Feliz vuelta al sol.</span>
                 </div>
-                
                 <p>Amor de mi vida y para mi vida…</p>
-
                 <p>A veces me pongo a pensar y no sé qué es más doloroso: si haber vivido algo tan real contigo y ahora extrañarlo, o nunca haberlo vivido. Pero si soy honesto, te volvería a elegir incluso sabiendo cómo termina cada distancia, porque fuiste la casualidad más linda de mi vida.</p>
-
                 <p>Me diste algo que nadie más ha podido darme. Incluso lograste regalarme el mejor cumpleaños en medio del caos, de las complicaciones y de todo lo que no estaba a nuestro favor. Y eso no se olvida.</p>
-
                 <p>Fue ahí cuando entendí algo que no estaba listo para aceptar. Cuando pensé que lo tendría todo, tú ya no estabas. Y en ese momento comprendí que tú eras todo.</p>
-
                 <p>A veces creo que Dios, la vida o la energía sabía que la única forma de separarnos era poniendo un océano entre nosotros, porque de otra forma simplemente no habría sido posible.</p>
-
                 <p>Quiero que sepas algo de verdad. El hombre que hoy ves, el que la gente admira, respeta y reconoce, tiene tu nombre escondido en cada logro. Es gracias a ti. Todo ese crédito es tuyo, porque fuiste una mujer increíble en todos los sentidos, porque tú fuiste parte de esto, porque tú me construiste en formas que nadie más va a entender.</p>
-
                 <p>Y hay algo que quiero que tengas claro. No tengo corazón, porque te lo di. Y si soy honesto, creo que te lo llevaste contigo. Eres la dueña de él y, que yo sepa, aún no me lo has regresado. Y lo peor es que ni siquiera quiero que me lo devuelvas.</p>
-
                 <p>Eres hermosa, encantadora, todo lo que podría describir como perfecto. Pero no solo eso… eres esa mezcla rara de paz, fuego, dulzura y locura que simplemente no se repite. Mi Danny…</p>
-
                 <p>Y aunque no te lo diga todos los días, aunque a veces lo disimule, la verdad es que te amo más que nunca. No de una forma pasajera, sino de esa forma que no se va, que no se olvida. Te amo de esa forma incómoda que se queda, que insiste y que no se reemplaza.</p>
-
                 <p>Hoy estamos lejos, pero hay cosas que no saben de distancia, como lo que siento por ti, como ese “hoy y siempre” que alguna vez dijimos y que yo todavía cumplo en silencio.</p>
-
                 <p>Te amo… mujer mía, esposa mía, madre de mis hijos.</p>
-
                 <p>Y sí, recuerda la promesa. Algún día me vas a hacer papá.</p>
-
                 <p>No sé en qué momento leas esto ni qué estés sintiendo ahora mismo, pero si algo quiero que te quede claro es esto: no fuiste algo bonito que pasó en mi vida… fuiste algo que me cambió para siempre.</p>
-
                 <div class="signature">
                     De tu ingeniero... <span class="heart-icon">🩵</span><br>
                     <strong>el que nunca deja de elegirte.</strong>
@@ -432,96 +247,73 @@
         <section class="video-section">
             <h3>Para que me sientas un poquito más cerca de ti</h3>
             <div class="video-wrapper">
-                <iframe 
-                    id="video-player"
-                    src="https://www.youtube.com/embed/_33z-zE3qGo"
-                    title="Mensaje especial para Danny" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
+                <iframe id="video-player" src="https://www.youtube.com/embed/_33z-zE3qGo" allowfullscreen></iframe>
             </div>
         </section>
 
         <footer class="project-footer">
-            <p>Código fuente del proyecto disponible en <a href="https://github.com/macedoflp/valentine" target="_blank">GitHub: macedoflp/valentine</a></p>
+            <p>Source code: <a href="https://github.com/macedoflp/valentine" target="_blank" style="color:#7f8c8d;">macedoflp/valentine</a></p>
         </footer>
-
     </div>
 
     <div class="music-hidden">
-        <iframe 
-            id="youtube-audio"
-            src="https://www.youtube.com/embed/cs0_s6o8uAI?enablejsapi=1&loop=1&playlist=cs0_s6o8uAI" 
-            allow="autoplay">
-        </iframe>
+        <iframe id="youtube-audio" src="https://www.youtube.com/embed/cs0_s6o8uAI?enablejsapi=1&loop=1&playlist=cs0_s6o8uAI" allow="autoplay"></iframe>
     </div>
 
     <script>
-        // Función principal al abrir la carta
-        document.getElementById('btn-abrir').addEventListener('click', function() {
-            const welcomeScreen = document.getElementById('welcome-screen');
-            const mainContent = document.getElementById('main-content');
-            const rainLayer = document.getElementById('rain-layer');
-            
-            welcomeScreen.style.opacity = '0';
-            mainContent.style.display = 'block';
-            rainLayer.style.display = 'block'; 
-            
+        function showWelcome() {
+            const intro = document.getElementById('intro-screen');
+            const welcome = document.getElementById('welcome-screen');
+            intro.style.opacity = '0';
             setTimeout(() => {
-                welcomeScreen.style.display = 'none'; 
-                mainContent.classList.add('visible');
-                createAmbientRain(); 
+                intro.style.display = 'none';
+                welcome.style.display = 'flex';
+                setTimeout(() => { welcome.style.opacity = '1'; }, 50);
             }, 800);
-
-            const audioIframe = document.getElementById('youtube-audio');
-            if (audioIframe) {
-                audioIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-            }
-        });
-
-        // Generador de Lluvia Infinita de Fondo (Girasoles y Destellos)
-        function createAmbientRain() {
-            const rainLayer = document.getElementById('rain-layer');
-            const elements = ['🌻', '✨', '🩵', '🌻'];
-            
-            setInterval(() => {
-                const particle = document.createElement('span');
-                particle.className = 'falling-element';
-                particle.innerText = elements[Math.floor(Math.random() * elements.length)];
-                
-                particle.style.left = Math.random() * 100 + 'vw';
-                particle.style.animationDuration = (Math.random() * 3 + 4) + 's'; 
-                particle.style.fontSize = (Math.random() * 1 + 1) + 'rem';
-                
-                rainLayer.appendChild(particle);
-                
-                setTimeout(() => { particle.remove(); }, 7000);
-            }, 400); 
         }
 
-        // Estela interactiva adicional en el cursor del mouse
-        document.addEventListener('mousemove', function(e) {
-            if (Math.random() > 0.88) { 
-                const petal = document.createElement('span');
-                petal.className = 'petal';
-                
-                const pool = ['🌻', '🩵', '✨', '🌻'];
-                petal.innerText = pool[Math.floor(Math.random() * pool.length)];
+        function openLetter() {
+            const welcome = document.getElementById('welcome-screen');
+            const main = document.getElementById('main-content');
+            const rain = document.getElementById('rain-layer');
+            document.body.style.overflow = 'auto';
+            welcome.style.opacity = '0';
+            setTimeout(() => {
+                welcome.style.display = 'none';
+                main.style.display = 'block';
+                rain.style.display = 'block';
+                setTimeout(() => { main.style.opacity = '1'; createAmbientRain(); }, 50);
+                const audio = document.getElementById('youtube-audio');
+                audio.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            }, 800);
+        }
 
-                petal.style.left = e.clientX + 'px';
-                petal.style.top = e.clientY + 'px';
+        function createAmbientRain() {
+            const layer = document.getElementById('rain-layer');
+            const elements = ['🌻', '✨', '🩵', '🌻'];
+            setInterval(() => {
+                const p = document.createElement('span');
+                p.className = 'falling-element';
+                p.innerText = elements[Math.floor(Math.random() * elements.length)];
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                p.style.fontSize = (Math.random() * 1 + 1) + 'rem';
+                layer.appendChild(p);
+                setTimeout(() => p.remove(), 7000);
+            }, 400);
+        }
 
-                const movementX = (Math.random() - 0.5) * 150;
-                const movementY = (Math.random() * 150) + 50; 
-                const rotation = (Math.random() - 0.5) * 360;
-
-                petal.style.setProperty('--mx', `${movementX}px`);
-                petal.style.setProperty('--my', `${movementY}px`);
-                petal.style.setProperty('--rt', `${rotation}deg`);
-
-                document.body.appendChild(petal);
-
-                setTimeout(() => { petal.remove(); }, 1200);
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() > 0.88) {
+                const p = document.createElement('span');
+                p.className = 'petal';
+                p.innerText = ['🌻', '🩵', '✨'][Math.floor(Math.random() * 3)];
+                p.style.left = e.clientX + 'px';
+                p.style.top = e.clientY + 'px';
+                p.style.setProperty('--mx', `${(Math.random()-0.5)*150}px`);
+                p.style.setProperty('--my', `${(Math.random()*150)+50}px`);
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 1200);
             }
         });
     </script>
