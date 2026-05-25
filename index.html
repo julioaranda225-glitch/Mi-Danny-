@@ -302,6 +302,27 @@
             border: none;
         }
 
+        /* --- PIE DE PÁGINA (REPOSITORIO) --- */
+        .project-footer {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #7f8c8d;
+        }
+
+        .project-footer a {
+            color: #555;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px dashed #7f8c8d;
+            transition: color 0.3s ease;
+        }
+
+        .project-footer a:hover {
+            color: var(--gold-glow);
+            border-bottom-style: solid;
+        }
+
         /* --- REPRODUCTOR DE MÚSICA OCULTO --- */
         .music-hidden {
             position: absolute;
@@ -410,11 +431,10 @@
 
         <section class="video-section">
             <h3>Para que me sientas un poquito más cerca de ti</h3>
-            <h3>https://www.youtube.com/watch?v=_33z-zE3qGo</h3>
             <div class="video-wrapper">
                 <iframe 
                     id="video-player"
-                    src="https://www.youtube.com/watch?v=HqYl-VkL1Mc&list=RDHqYl-VkL1Mc&start_radio=1"
+                    src="https://www.youtube.com/embed/_33z-zE3qGo"
                     title="Mensaje especial para Danny" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowfullscreen>
@@ -422,12 +442,16 @@
             </div>
         </section>
 
+        <footer class="project-footer">
+            <p>Código fuente del proyecto disponible en <a href="https://github.com/macedoflp/valentine" target="_blank">GitHub: macedoflp/valentine</a></p>
+        </footer>
+
     </div>
 
     <div class="music-hidden">
         <iframe 
             id="youtube-audio"
-            src="https://www.youtube.com/embed/cs0_s6o8uAI?enablejsapi=1&loop=1&playlist=cs0_s6o8uAI,7s4pK3s8-lE" 
+            src="https://www.youtube.com/embed/cs0_s6o8uAI?enablejsapi=1&loop=1&playlist=cs0_s6o8uAI" 
             allow="autoplay">
         </iframe>
     </div>
