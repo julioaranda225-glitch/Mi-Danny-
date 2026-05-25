@@ -18,6 +18,11 @@
             --ink-dark: #2c1d11;
             --bg-gradient: linear-gradient(135deg, #f5efe3 0%, #dcd3b8 100%);
             --github-dark: #24292e;
+            
+            /* Variables de color para las flores animadas */
+            --bg-flowers: #0b1522;
+            --color-glass: linear-gradient(to left, #142544, #1a2f55);
+            --color-water: linear-gradient(to left, #142544, #1b3056);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -54,14 +59,12 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             max-width: 500px;
             width: 100%;
-            position: relative;
         }
 
         .github-box i { font-size: 4rem; color: var(--github-dark); margin-bottom: 20px; }
         .github-box h2 { font-size: 1.5rem; margin-bottom: 10px; color: var(--github-dark); }
         .github-box p { color: #586069; margin-bottom: 20px; font-size: 0.9rem; }
         
-        /* Animación sutil de carga técnica */
         .loading-status {
             font-size: 0.85rem;
             color: #28a745;
@@ -74,8 +77,7 @@
         }
         
         .spinner {
-            width: 14px;
-            height: 14px;
+            width: 14px; height: 14px;
             border: 2px solid #28a745;
             border-top-color: transparent;
             border-radius: 50%;
@@ -83,57 +85,102 @@
         }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* --- 2. PANTALLA DE BIENVENIDA (GIRASOLES) --- */
+        /* --- 2. PANTALLA DE BIENVENIDA (INTEGRACIÓN FLOWER CODE) --- */
         #welcome-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, #fff 20%, #f6e58d 100%);
+            background-color: var(--bg-flowers);
             z-index: 1000;
             display: none;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             transition: opacity 0.8s ease-in-out;
             opacity: 0;
         }
 
-        .sunflower-garden { position: absolute; width: 100%; height: 100%; pointer-events: none; }
-        .bg-sunflower {
-            position: absolute; font-size: 5rem;
-            animation: floatSunflower 6s ease-in-out infinite alternate;
-            opacity: 0.8;
-        }
-
-        @keyframes floatSunflower {
-            0% { transform: translateY(0) rotate(0deg); }
-            100% { transform: translateY(-20px) rotate(15deg); }
-        }
-
-        .welcome-box {
+        /* Contenedor del Mensaje flotante e interactivo encima de las flores */
+        .flower-interface {
+            position: absolute;
+            top: 12%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1100;
             text-align: center;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-            border: 3px solid var(--primary-yellow);
-            z-index: 10;
-            max-width: 90%;
-            animation: pulseBox 2.5s infinite alternate ease-in-out;
+            padding: 0 20px;
+            pointer-events: none; /* Permite clics debajo si es necesario */
         }
 
-        @keyframes pulseBox {
-            0% { transform: scale(0.97); }
-            100% { transform: scale(1.02); }
+        .flower-interface h1 {
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+            font-size: 2.2rem;
+            text-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            margin-bottom: 5px;
         }
 
-        .welcome-box h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 1rem; }
+        .flower-interface .message-sub {
+            color: #FFD700;
+            font-family: 'Caveat', cursive;
+            font-size: 2rem;
+            margin-bottom: 25px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+        }
+
         .enter-btn {
             background: linear-gradient(135deg, var(--primary-yellow) 0%, #f39c12 100%);
-            color: #fff; border: none; padding: 16px 45px;
-            font-size: 1.25rem; font-weight: 600; border-radius: 30px;
-            cursor: pointer; box-shadow: 0 5px 20px rgba(243, 156, 18, 0.5);
-            margin-top: 1rem;
+            color: #fff; border: none; padding: 14px 40px;
+            font-size: 1.15rem; font-weight: 600; border-radius: 30px;
+            cursor: pointer; box-shadow: 0 5px 25px rgba(243, 156, 18, 0.4);
+            pointer-events: auto; /* Habilita el clic en el botón */
+            transition: all 0.3s ease;
         }
+        .enter-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(243, 156, 18, 0.6);
+        }
+
+        /* --- ESTILOS COMPLETO EXTRACTO DEL PEN: FLOWER ANIMATION --- */
+        .flowers { position: relative; width: 100%; height: 100%; display: flex; align-items: flex-end; justify-content: center; min-height: 100vh; padding-bottom: 20vh; overflow: hidden; }
+        .flower { position: relative; }
+        .flower::after { content: ''; position: absolute; width: 2vw; height: 2vw; background-color: #fff; border-radius: 50%; top: -2vw; left: 50%; transform: translateX(-50%); filter: blur(1.5vw); }
+        
+        .flower--1 { animation: grow-flower-1 4s ease-in-out forwards; }
+        .flower--1 .flower__line { height: 65vh; animation-delay: 0.3s; }
+        .flower--2 { transform: rotate(10deg); transform-origin: bottom center; animation: grow-flower-2 4s ease-in-out forwards; }
+        .flower--2 .flower__line { height: 55vh; animation-delay: 0.6s; }
+        .flower--3 { transform: rotate(-10deg); transform-origin: bottom center; animation: grow-flower-3 4s ease-in-out forwards; }
+        .flower--3 .flower__line { height: 50vh; animation-delay: 0.9s; }
+
+        .flower__line { width: 0.4vw; background-image: linear-gradient(to top, rgba(0,0,0,0), #122c15, #367c3f); border-radius: 2vw; height: 0; animation: grow-element 4s ease-in-out forwards; }
+        .flower__leafs { position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%) scale(0); animation: bloom-flower 2s 2.5s ease-in-out forwards; }
+        .flower__white-circle { width: 6vw; height: 6vw; background-color: #fff; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        
+        /* Pétalos Amarillos estilo Girasol del original */
+        .flower__leaf { position: absolute; width: 6vw; height: 14vw; background-image: linear-gradient(to top, #ffa200, #ffca00, rgba(255,255,255,0.4)); border-radius: 50% 50% 0 0; transform-origin: bottom center; }
+        .flower__leaf--1 { transform: translate(-50%, -100%) rotate(0deg); }
+        .flower__leaf--2 { transform: translate(-50%, -100%) rotate(90deg); }
+        .flower__leaf--3 { transform: translate(-50%, -100%) rotate(180deg); }
+        .flower__leaf--4 { transform: translate(-50%, -100%) rotate(270deg); }
+
+        /* Luces místicas del Pen */
+        .flower__light { position: absolute; bottom: 0; width: 0.5vw; height: 0.5vw; background-color: #fffb00; border-radius: 50%; filter: blur(0.2vw); animation: light-ans 4s linear infinite; }
+        .flower__light--1 { left: 20%; animation-delay: 1s; } .flower__light--2 { left: 40%; animation-delay: 1.5s; }
+        .flower__light--3 { left: 60%; animation-delay: 2s; } .flower__light--4 { left: 80%; animation-delay: 2.5s; }
+
+        /* Hojas de los tallos */
+        .flower__line__leaf { position: absolute; width: 4vw; height: 8vw; background-image: linear-gradient(to top, rgba(16,61,22,0.4), #255829, #4b9351); border-radius: 50% 50% 0 50%; transform-origin: bottom right; }
+        .flower__line__leaf--1 { top: 30%; left: -3.8vw; transform: rotate(-40deg); }
+        .flower__line__leaf--2 { top: 50%; right: -3.8vw; transform: rotate(40deg) scaleX(-1); }
+
+        /* Animaciones base de crecimiento de Nilver-TI */
+        @keyframes grow-element { to { height: 100%; } }
+        @keyframes bloom-flower { to { transform: translate(-50%, -50%) scale(1); } }
+        @keyframes light-ans { 0% { transform: translateY(0); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-70vh); opacity: 0; } }
+        @keyframes grow-flower-1 { 0% { transform: translateY(50px); } 100% { transform: translateY(0); } }
+        @keyframes grow-flower-2 { 0% { transform: translateY(50px) rotate(0deg); } 100% { transform: translateY(0) rotate(10deg); } }
+        @keyframes grow-flower-3 { 0% { transform: translateY(50px) rotate(0deg); } 100% { transform: translateY(0) rotate(-10deg); } }
 
         /* --- 3. CONTENEDOR DE LA CARTA --- */
         .main-container {
@@ -183,6 +230,8 @@
             .letter-paper { padding: 3rem 1.5rem; }
             .letter-content { font-size: 1.6rem; }
             .letter-header-flex { flex-direction: column; }
+            .flower__leaf { width: 10vw; height: 22vw; }
+            .flower__line__leaf { width: 8vw; height: 14vw; }
         }
     </style>
 </head>
@@ -201,15 +250,56 @@
     </div>
 
     <div id="welcome-screen">
-        <div class="sunflower-garden">
-            <span class="bg-sunflower" style="top: 10%; left: 10%;">🌻</span>
-            <span class="bg-sunflower" style="top: 15%; right: 15%;">🌻</span>
-            <span class="bg-sunflower" style="bottom: 20%; left: 5%;">🌻</span>
-        </div>
-        <div class="welcome-box">
+        <div class="flower-interface">
             <h1>Para mi persona favorita 🩵</h1>
-            <p>Danny, hoy el sol brilla más porque es tu día.</p>
+            <div class="message-sub">Estas flores amarillas son para ti</div>
             <button class="enter-btn" onclick="openLetter()">Abrir la carta</button>
+        </div>
+
+        <div class="flowers">
+            <div class="flower flower--1">
+                <div class="flower__leafs flower__leafs--1">
+                    <div class="flower__leaf flower__leaf--1"></div>
+                    <div class="flower__leaf flower__leaf--2"></div>
+                    <div class="flower__leaf flower__leaf--3"></div>
+                    <div class="flower__leaf flower__leaf--4"></div>
+                    <div class="flower__white-circle"></div>
+                    <div class="flower__light flower__light--1"></div>
+                    <div class="flower__light flower__light--2"></div>
+                </div>
+                <div class="flower__line">
+                    <div class="flower__line__leaf flower__line__leaf--1"></div>
+                    <div class="flower__line__leaf flower__line__leaf--2"></div>
+                </div>
+            </div>
+
+            <div class="flower flower--2">
+                <div class="flower__leafs flower__leafs--2">
+                    <div class="flower__leaf flower__leaf--1"></div>
+                    <div class="flower__leaf flower__leaf--2"></div>
+                    <div class="flower__leaf flower__leaf--3"></div>
+                    <div class="flower__leaf flower__leaf--4"></div>
+                    <div class="flower__white-circle"></div>
+                    <div class="flower__light flower__light--3"></div>
+                </div>
+                <div class="flower__line">
+                    <div class="flower__line__leaf flower__line__leaf--1"></div>
+                </div>
+            </div>
+
+            <div class="flower flower--3">
+                <div class="flower__leafs flower__leafs--3">
+                    <div class="flower__leaf flower__leaf--1"></div>
+                    <div class="flower__leaf flower__leaf--2"></div>
+                    <div class="flower__leaf flower__leaf--3"></div>
+                    <div class="flower__leaf flower__leaf--4"></div>
+                    <div class="flower__white-circle"></div>
+                    <div class="flower__light flower__light--4"></div>
+                </div>
+                <div class="flower__line">
+                    <div class="flower__line__leaf flower__line__leaf--2"></div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -273,10 +363,10 @@
                     welcome.style.display = 'flex';
                     setTimeout(() => { welcome.style.opacity = '1'; }, 50);
                 }, 800);
-            }, 3000); // 3000 milisegundos = 3 segundos de espera técnica
+            }, 3000); 
         });
 
-        // Paso 2 al Paso 3 (Requiere clic para activar el audio del navegador)
+        // Paso 2 al Paso 3 
         function openLetter() {
             const welcome = document.getElementById('welcome-screen');
             const main = document.getElementById('main-content');
