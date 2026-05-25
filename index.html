@@ -11,6 +11,8 @@
     <style>
         :root {
             --primary-yellow: #ffd700;
+            --sunflower-dark: #ffaa00;
+            --sunflower-center: #3a1f05;
             --gold-glow: #f39c12;
             --soft-blue: #A2C2E8;
             --paper-cream: #fbf6ec;
@@ -29,13 +31,13 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden; /* Se habilita el scroll dinámicamente al abrir la carta */
+            overflow: hidden;
             font-family: 'Montserrat', sans-serif;
             color: #fff;
             position: relative;
         }
 
-        /* --- PANTALLA 1: INICIO ORIGINAL --- */
+        /* --- PANTALLA 1: INICIO --- */
         #start-screen {
             text-align: center;
             z-index: 10;
@@ -60,7 +62,7 @@
             background-color: #fff;
         }
 
-        /* --- PANTALLA 2: CONTENIDO DE FLORES Y MENSAJE --- */
+        /* --- PANTALLA 2: RAMO DE GIRASOLES MEJORADO --- */
         #flowers-content {
             display: none;
             text-align: center;
@@ -70,56 +72,122 @@
             transform: translate(-50%, -50%);
             width: 90%;
             max-width: 600px;
-            animation: fadeIn 1.5s ease;
         }
 
         .message {
-            margin-bottom: 30px;
+            margin-bottom: 50px;
             font-size: 1.6rem;
             text-shadow: 0 0 10px #ffd700;
             line-height: 1.4;
         }
 
-        /* Estilización del ramo */
+        /* Estilización Avanzada del Ramo de Girasoles */
         .ramo {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 40px;
+            align-items: flex-end;
+            gap: 40px;
+            height: 220px;
+            margin-bottom: 50px;
         }
 
-        .flor {
-            width: 55px;
-            height: 55px;
-            background-color: #ffd700;
-            border-radius: 50%;
+        .girasol-wrapper {
             position: relative;
-            box-shadow: 0 0 20px #ffd700;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: bloom 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
-        .flor::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: 10px;
-            width: 33px;
-            height: 33px;
-            background-color: #ffcc00;
-            border-radius: 50%;
+        /* Tallo y hojas del girasol */
+        .tallo {
+            width: 6px;
+            height: 120px;
+            background: linear-gradient(to top, #1e5322, #2e7d32);
+            border-radius: 4px;
+            position: relative;
+            z-index: 1;
         }
 
-        .flor::after {
+        .tallo::after {
             content: '';
             position: absolute;
-            top: 25px;
-            left: -10px;
-            width: 22px;
-            height: 42px;
+            top: 40px;
+            left: 5px;
+            width: 25px;
+            height: 15px;
             background-color: #2e7d32;
-            border-radius: 50%;
-            z-index: -1;
-            transform: rotate(-30deg);
+            border-radius: 100% 0% 100% 0%;
+            transform: rotate(15deg);
         }
+
+        .girasol-wrapper:nth-child(even) .tallo::after {
+            left: -24px;
+            border-radius: 0% 100% 0% 100%;
+            transform: rotate(-15deg);
+        }
+
+        /* Cabeza del Girasol */
+        .girasol-head {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            z-index: 2;
+            margin-bottom: -5px;
+        }
+
+        /* Centro oscuro del Girasol */
+        .centro {
+            width: 44px;
+            height: 44px;
+            background-color: var(--sunflower-center);
+            background-image: radial-gradient(#542e0c 20%, transparent 25%), radial-gradient(#261403 20%, transparent 25%);
+            background-size: 6px 6px;
+            background-position: 0 0, 3px 3px;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+            box-shadow: inset 0 0 8px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.3);
+        }
+
+        /* Contenedor de pétalos individuales distribuidos matemáticamente */
+        .petalos {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 3;
+        }
+
+        .petalo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 14px;
+            height: 36px;
+            background: linear-gradient(to top, var(--sunflower-dark), var(--primary-yellow));
+            border-radius: 50% 50% 10% 10%;
+            transform-origin: bottom center;
+            box-shadow: 0 -2px 5px rgba(255,170,0,0.2);
+        }
+
+        /* Rotación exacta para cada uno de los 12 pétalos */
+        .petalo:nth-child(1)  { transform: translate(-50%, -100%) rotate(0deg); }
+        .petalo:nth-child(2)  { transform: translate(-50%, -100%) rotate(30deg); }
+        .petalo:nth-child(3)  { transform: translate(-50%, -100%) rotate(60deg); }
+        .petalo:nth-child(4)  { transform: translate(-50%, -100%) rotate(90deg); }
+        .petalo:nth-child(5)  { transform: translate(-50%, -100%) rotate(120deg); }
+        .petalo:nth-child(6)  { transform: translate(-50%, -100%) rotate(150deg); }
+        .petalo:nth-child(7)  { transform: translate(-50%, -100%) rotate(180deg); }
+        .petalo:nth-child(8)  { transform: translate(-50%, -100%) rotate(210deg); }
+        .petalo:nth-child(9)  { transform: translate(-50%, -100%) rotate(240deg); }
+        .petalo:nth-child(10) { transform: translate(-50%, -100%) rotate(270deg); }
+        .petalo:nth-child(11) { transform: translate(-50%, -100%) rotate(300deg); }
+        .petalo:nth-child(12) { transform: translate(-50%, -100%) rotate(330deg); }
 
         .continue-btn {
             background-color: transparent;
@@ -131,7 +199,6 @@
             border-radius: 25px;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 20px;
         }
 
         .continue-btn:hover {
@@ -140,7 +207,7 @@
             box-shadow: 0 0 15px #ffd700;
         }
 
-        /* --- PANTALLA 3: CONTENEDOR DE LA CARTA --- */
+        /* --- PANTALLA 3: LA CARTA --- */
         .main-container {
             max-width: 800px;
             width: 100%;
@@ -174,18 +241,23 @@
         .heart-icon { color: var(--soft-blue); animation: heartbeat 1.5s infinite; display: inline-block; }
         @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
 
-        /* VIDEO Y SECCIONES INTERNAS */
         .video-section { margin-top: 3.5rem; background: rgba(255,255,255,0.9); padding: 2.5rem; border-radius: 15px; text-align: center; }
         .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; background: #000; }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-        /* EFECTOS AMBIENTALES DE LLUVIA Y PÉTALOS */
+        /* EFECTOS AMBIENTALES */
         .ambient-rain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; display: none; }
         .falling-element { position: absolute; animation: fallAnimation linear infinite; color: #fff; }
         @keyframes fallAnimation { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; } 10% { opacity: 0.8; } 100% { transform: translateY(105vh) rotate(360deg); opacity: 0; } }
         
         .petal { position: fixed; pointer-events: none; z-index: 9999; animation: fadeOutPetal 1.2s forwards; }
         @keyframes fadeOutPetal { 0% { opacity: 1; transform: scale(1.2); } 100% { opacity: 0; transform: translate(var(--mx), var(--my)) scale(0.4); } }
+
+        /* ANIMACIONES */
+        @keyframes bloom {
+            from { transform: scale(0) translateY(50px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
+        }
 
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -196,6 +268,7 @@
             .letter-paper { padding: 3rem 1.5rem; }
             .letter-content { font-size: 1.6rem; }
             .letter-header-flex { flex-direction: column; }
+            .ramo { gap: 15px; }
         }
     </style>
 </head>
@@ -207,11 +280,45 @@
 
     <div id="flowers-content">
         <div class="message">"Tal vez no sean reales, pero estas flores amarillas son para ti."</div>
+        
         <div class="ramo">
-            <div class="flor"></div>
-            <div class="flor" style="top: -20px;"></div>
-            <div class="flor"></div>
+            <div class="girasol-wrapper" style="animation-delay: 0.1s; transform: rotate(-10deg);">
+                <div class="girasol-head">
+                    <div class="centro"></div>
+                    <div class="petalos">
+                        <div class="petalo"></div><div class="petalo"></div><div class="petalo"></div><div class="petalo"></div>
+                        <div class="petalo"></div><div class="petalo"></div><div class="petalo"></div><div class="petalo"></div>
+                        <div class="petalo"></div><div class="petalo"></div><div class="petalo"></div><div class="petalo"></div>
+                    </div>
+                </div>
+                <div class="tallo" style="height: 110px;"></div>
+            </div>
+
+            <div class="girasol-wrapper" style="animation-delay: 0.4s; z-index: 10;">
+                <div class="girasol-head" style="width: 90px; height: 90px;">
+                    <div class="centro" style="width: 50px; height: 50px;"></div>
+                    <div class="petalos">
+                        <div class="petalo" style="height: 42px;"></div><div class="petalo" style="height: 42px;"></div><div class="petalo" style="height: 42px;"></div><div class="petalo" style="height: 42px;"></div>
+                        <div class="petalo" style="height: 42px;"></div><div class="petalo" style="height: 42px;"></div><div class="petalo" style="height: 42px;"></div><div class="petalo" style="height: 42px;"></div>
+                        <div class="petalo" style="height: 42px;"></div><div class="petalo" style="height: 42px;"></div><div class="petalo" style="height: 42px;"></div><div class="petalo" style="height: 42px;"></div>
+                    </div>
+                </div>
+                <div class="tallo" style="height: 140px;"></div>
+            </div>
+
+            <div class="girasol-wrapper" style="animation-delay: 0.2s; transform: rotate(10deg);">
+                <div class="girasol-head">
+                    <div class="centro"></div>
+                    <div class="petalos">
+                        <div class="petalo"></div><div class="petalo"></div><div class="petalo"></div><div class="petalo"></div>
+                        <div class="petalo"></div><div class="petalo"></div><div class="petalo"></div><div class="petalo"></div>
+                        <div class="petalo"></div><div class="petalo"></div><div class="petalo"></div><div class="petalo"></div>
+                    </div>
+                </div>
+                <div class="tallo" style="height: 105px;"></div>
+            </div>
         </div>
+
         <button class="continue-btn" onclick="openLetter()">Leer carta completa 🩵</button>
     </div>
 
@@ -260,20 +367,18 @@
     </div>
 
     <script>
-        // Función original modificada para hacer la transición interna
         function mostrarRamo() {
             document.getElementById('start-screen').style.display = 'none';
             const flowersContent = document.getElementById('flowers-content');
             flowersContent.style.display = 'block';
+            flowersContent.style.animation = 'fadeIn 1s ease forwards';
         }
 
-        // Transición de las flores amarillas a la carta final
         function openLetter() {
             const flowersContent = document.getElementById('flowers-content');
             const mainContent = document.getElementById('main-content');
             const rainLayer = document.getElementById('rain-layer');
             
-            // Configura el body para permitir la lectura y el fondo adecuado
             document.body.style.overflow = 'auto';
             document.body.style.display = 'block';
             document.body.style.background = 'linear-gradient(135deg, #f5efe3 0%, #dcd3b8 100%)';
@@ -289,13 +394,11 @@
                     createAmbientRain(); 
                 }, 50);
                 
-                // Dispara el audio en segundo plano al interactuar con el botón
                 const audio = document.getElementById('youtube-audio');
                 audio.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
             }, 500);
         }
 
-        // Lluvia ambiental sutil
         function createAmbientRain() {
             const layer = document.getElementById('rain-layer');
             const elements = ['🌻', '✨', '🩵', '🌻'];
@@ -311,7 +414,6 @@
             }, 500);
         }
 
-        // Estela mágica del cursor
         document.addEventListener('mousemove', (e) => {
             if (Math.random() > 0.88) {
                 const p = document.createElement('span');
